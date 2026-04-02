@@ -1,0 +1,212 @@
+/* ─── Custom Fonts ──────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Favorit';
+  src: url('../fonts/Favorit-Regular.woff2') format('woff2'),
+       url('../fonts/Favorit-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Favorit';
+  src: url('../fonts/Favorit-Medium.woff2') format('woff2'),
+       url('../fonts/Favorit-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('../fonts/SuisseIntl-Regular.woff2') format('woff2'),
+       url('../fonts/SuisseIntl-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('../fonts/SuisseIntl-Medium.woff2') format('woff2'),
+       url('../fonts/SuisseIntl-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Reset & Base ──────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --sidebar-width: 420px;
+  --bg-sidebar: #F5F2EE;
+  --bg-main: #1E1E1E;
+  --accent: #D4822A;
+  --font-heading: 'Favorit', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Suisse Intl', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Sidebar ───────────────────────────────────────────────── */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 52px 44px 44px;
+}
+
+.sidebar__top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar__name {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 500;
+  color: #1A1A1A;
+  letter-spacing: -0.3px;
+}
+
+.sidebar__title {
+  font-size: 13px;
+  font-weight: 400;
+  color: #888;
+  line-height: 1.6;
+}
+
+.sidebar__title strong {
+  font-weight: 600;
+  color: #555;
+}
+
+.sidebar__bio {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #666;
+}
+
+/* ─── Nav ───────────────────────────────────────────────────── */
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: #999;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: #1A1A1A;
+}
+
+.nav-link--active {
+  color: var(--accent);
+}
+
+/* ─── Projects ──────────────────────────────────────────────── */
+
+.projects {
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--bg-main);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 10px;
+  scrollbar-width: none;
+}
+
+.projects::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Project Card ──────────────────────────────────────────── */
+
+.project-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 44px;
+  background: #1E1E1E;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.project-card:hover {
+  background: #252525;
+}
+
+.project-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.project-card__category {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.project-card__meta {
+  font-size: 11px;
+  font-weight: 400;
+  color: #555;
+  letter-spacing: 0.2px;
+}
+
+.project-card__title {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 500;
+  color: #F5F2EE;
+  letter-spacing: 0.2px;
+}
+
+/* ─── Divider ───────────────────────────────────────────────── */
+
+.projects__divider {
+  height: 1px;
+  background: #2E2E2E;
+  flex-shrink: 0;
+}
