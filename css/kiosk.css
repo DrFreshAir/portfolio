@@ -1,0 +1,205 @@
+/* ─── Custom Fonts ──────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Favorit';
+  src: url('../fonts/Favorit-Regular.woff2') format('woff2'),
+       url('../fonts/Favorit-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Favorit';
+  src: url('../fonts/Favorit-Medium.woff2') format('woff2'),
+       url('../fonts/Favorit-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Favorit';
+  src: url('../fonts/Favorit-Bold.woff2') format('woff2'),
+       url('../fonts/Favorit-Bold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('../fonts/SuisseIntl-Regular.woff2') format('woff2'),
+       url('../fonts/SuisseIntl-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('../fonts/SuisseIntl-Medium.woff2') format('woff2'),
+       url('../fonts/SuisseIntl-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Reset & Base ──────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #1E1E1E;
+  --accent: #D4822A;
+  --text-primary: #F5F2EE;
+  --text-secondary: #888;
+  --text-muted: #555;
+  --font-heading: 'Favorit', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Suisse Intl', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --max-width: 800px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ─── Top Bar ───────────────────────────────────────────────── */
+
+.topbar {
+  width: 100%;
+  height: 56px;
+  background: #1E1E1E;
+  display: flex;
+  align-items: center;
+  padding: 0 48px;
+}
+
+/* ─── Back Button ───────────────────────────────────────────── */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+}
+
+/* ─── Hero ──────────────────────────────────────────────────── */
+
+.hero {
+  width: 100%;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ─── Case Study Layout ─────────────────────────────────────── */
+
+.case-study {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 96px 40px 120px;
+}
+
+/* ─── Sections ──────────────────────────────────────────────── */
+
+.section {
+  margin-bottom: 96px;
+}
+
+.section--hero {
+  margin-bottom: 80px;
+}
+
+/* ─── Typography ────────────────────────────────────────────── */
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: #AAAAAA;
+}
+
+p + p {
+  margin-top: 16px;
+}
+
+/* ─── Images ────────────────────────────────────────────────── */
+
+.case-study img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.img-caption {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+/* ─── Divider ───────────────────────────────────────────────── */
+
+.divider {
+  height: 1px;
+  background: #2E2E2E;
+  margin: 64px 0;
+}
