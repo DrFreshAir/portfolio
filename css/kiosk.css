@@ -216,7 +216,7 @@ p + p {
 }
 
 .overview__block {
-  margin-bottom: 32px;
+  margin-bottom: 48px;
 }
 
 .overview__block:last-child {
@@ -226,7 +226,8 @@ p + p {
 /* Objectives list */
 
 .overview__list {
-  list-style: none;
+  list-style: disc;
+  padding-left: 18px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -372,6 +373,28 @@ details[open] .accordion__icon {
 
 .accordion__body {
   padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.accordion__body > p,
+.accordion__body > img,
+.accordion__body > ul,
+.accordion__body > .innovation-decisions,
+.accordion__body > .comparison-grid,
+.accordion__body > .process-lists {
+  margin-bottom: 20px;
+}
+
+.accordion__body > .process-list__label {
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.accordion__body > .innovation-decisions__heading {
+  margin-top: 20px;
+  margin-bottom: 12px;
 }
 
 .accordion__body img {
@@ -379,6 +402,184 @@ details[open] .accordion__icon {
   height: auto;
   display: block;
   border-radius: 8px;
+}
+
+/* ─── Process ───────────────────────────────────────────────── */
+
+.phase {
+  margin-bottom: 56px;
+}
+
+.phase:last-child {
+  margin-bottom: 0;
+}
+
+.phase__heading {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 24px;
+}
+
+.process-lists {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding-top: 4px;
+}
+
+.process-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.process-list__label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.process-list__items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.process-list__items li {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-primary);
+  padding-left: 14px;
+  position: relative;
+}
+
+.process-list__items li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+/* ─── Innovation Blocks ─────────────────────────────────────── */
+
+.innovation-block {
+  margin-bottom: 48px;
+}
+
+.innovation-block--last {
+  margin-bottom: 0;
+}
+
+.innovation-questions {
+  list-style: none;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.innovation-questions li {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.innovation-decisions__heading {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.innovation-decisions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.innovation-decisions__item {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* ─── Comparison Grid ───────────────────────────────────────── */
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.comparison-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comparison-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.comparison-item__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ─── Outcome ────────────────────────────────────────────────── */
+
+.outcome-hero {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  margin-top: 40px;
+}
+
+/* ─── Return to Top ─────────────────────────────────────────── */
+
+.return-top-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 32px 48px 80px;
+}
+
+.return-top {
+  background: transparent;
+  border: 1px solid #F5F2EE;
+  color: #F5F2EE;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.return-top:hover {
+  background: rgba(245, 242, 238, 0.08);
 }
 
 /* ─── Divider ───────────────────────────────────────────────── */

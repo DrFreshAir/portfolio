@@ -152,17 +152,250 @@
       </div>
     </section>
 
-    <!-- Section 4 -->
+    <!-- Process -->
     <section class="section">
-      <!-- content coming -->
+      <h1 class="section__title">Process</h1>
+      <p class="section__intro">The process was methodical by necessity. Before any design actually started, we needed to understand what we were actually building and plan how it would be implemented. Early research narrowed the path forward, stakeholder alignment kept the project moving through a large organization, and a deliberate return to low fidelity ensured we were solving the right interaction problems before committing to them visually.</p>
+
+      <!-- Phase 1 -->
+      <div class="phase">
+        <h2 class="phase__heading">Phase 1 — Discovery</h2>
+        <div class="accordion">
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Audit</span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>Before any design decisions could be made, we needed to understand what already existed. I conducted a full audit of the available Redwood page templates documenting each one and cataloging the patterns they included. As we built our comparison matrix we began mapping them against the proposed demo to identify where they aligned and where they fell short. This research helped us not only identify what was available, but what could be altered to fit our needs. Even in a custom build scenario, identifying viable starting points within Redwood meant we weren't starting from zero on every page, reducing the scope of net new work and giving engineering a faster path to implementation. This research helped us not only identify what was available, but what could be altered to fit our needs.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>Can any existing Redwood templates be used as-is?</li>
+                      <li>Where existing templates fall short, are there patterns we can use as a starting point for custom development?</li>
+                      <li>If custom development is required, what is the most viable path forward?</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Analysis</span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>With the audit complete, we moved into analysis for each template against the wireframes and documenting our findings. For each template we captured what worked, what didn't, and why. Though nothing was perfect match, not all templates weren't dismissed, their viable patterns were collected and cataloged as potential candidates for the custom build phase, giving us a library of starting points to draw from rather than designing everything from scratch.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Key Insights</span>
+                    <ul class="process-list__items">
+                      <li>Though nothing in the Redwood Design System could be used as-is, the audit surfaced a strong foundation of patterns to leverage as we began designing new solutions.</li>
+                      <li>The most significant gap identified at this stage: no existing control surface could deliver the functionality the product required.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Alignment</span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>The research didn't leave much room for debate. The audit and analysis made clear that neither native Redwood templates nor a hybrid approach could meet the product requirements. As a design team we aligned on the custom route as the only viable path forward. Moving forward required more than a design decision though. Committing to a custom build meant aligning with engineering on resourcing. Design and development came to the table, agreed on the path, and committed the resources to see it through the entire process required to create a custom page template.</p>
+              </div>
+            </details>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase">
+        <h2 class="phase__heading">Phase 2 — Interaction Modeling</h2>
+        <div class="accordion">
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Reset</span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>With no existing pattern to build from we returned to basics. Rather than forcing fidelity too early, we stripped everything back to gray boxes and began broadly drawing interaction models that could satisfy the product requirements. Each model was shaped by the original demo as a reference point, the constraints we were designing within, and the design sensibility of the team.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>How does an operator move through a work order?</li>
+                      <li>What does the primary interaction model look like?</li>
+                      <li>What does the screen need to surface at any given moment, and what can be secondary?</li>
+                      <li>How do we honor the demo's vision while designing for the constraints the demo ignored?</li>
+                      <li>What interaction patterns have our customers already responded to that we can draw from?</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Exploration</span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>Four interaction models were developed, each representing a distinct philosophy for how the product should behave.</p>
+                    <p><strong>Vegas:</strong> Steps presented as scrollable cards on the left, with details surfaced on the right. Navigation through the work order driven by scrolling rather than discrete actions.</p>
+                    <p><strong>Gravity:</strong> All primary functionality pushed as low on the screen as possible, acknowledging the physical reality of operators reaching across a workstation.</p>
+                    <p><strong>Triptych:</strong> An information-heavy layout built on the assumption that access to attachments and supporting detail reduces errors. The more informed the operator, the fewer mistakes.</p>
+                    <p><strong>MiniFlex:</strong> A synthesis of the other models. Kept interaction accessible without overloading the viewport while being functional without being overwhelming.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>Each model was a different answer to the same question, what does this operator actually need in front of them, and what gets in the way?</li>
+                    </ul>
+                  </div>
+                </div>
+                <img src="images/kiosk/four-concepts.png" alt="Four interaction models" style="width: 100%; height: auto; display: block; margin-top: 28px; border-radius: 8px;">
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Validation</span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>Validation was conducted internally. With direct access to factory floor operators limited, we brought the right voices into the room. Our VP of Design and the Strategy PM who served as the customer proxy, represented the specific needs and preferences of operators based on their direct knowledge of the user base. Each model was evaluated against what operators would actually respond to, what would create friction, and what aligned with the constraints of the environment. MiniFlex ended up being the selected direction. It met the core needs of the operator while leaning on enough existing patterns to limit the scope of net new work which freed up the team to concentrate resources on the one component that had no precedent: the toolbar.</p>
+              </div>
+            </details>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase">
+        <h2 class="phase__heading">Phase 3 — High Fidelity</h2>
+        <div class="accordion">
+
+          <!-- Adaptation -->
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Adaptation</span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>Across all four models, certain elements were consistent, things every operator would need regardless of which interaction model we pursued. We landed on five core components: the Page Header, Multi-Page Navigation, Single-Page Navigation, Action Buttons, and Auxiliary Content such as safety instructions, quality documentation, and attachments. With requirements defined, we began matching components to their closest Redwood equivalents. Some were quick wins like the Headers, Action Buttons, and Auxiliary Content as each had close enough existing patterns to adapt efficiently. Others required significantly more work. Multi-Page Navigation needed iteration and Action Buttons (which evolved in scope and complexity throughout the process) ultimately became the toolbar, the one component the design system couldn't provide a starting point for.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>Which of these components already exist in our design system, and how close are they to what we need?</li>
+                      <li>For every component we alter, is the enhancement worth the backlog cost?</li>
+                      <li>Where do we spend our design effort?</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- Innovation -->
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Innovation</span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>Throughout exploration and adaptation, one problem remained unsolved. The bottom of the screen had accumulated a growing set of functions (step navigation, time tracking, attachments, actions) but no arrangement efficiently contained them. Existing patterns couldn't organize the complexity, and time tracking data had no clear home.</p>
+                <p>The inspiration came from outside enterprise software entirely. The Dynamic Island, a functional companion that adapts to what you're doing as you do it. Motorsport timing displays, real-time metrics that communicate critical information at a glance without demanding attention. Both pointing us toward the same idea: a container that lives at the edge of the experience, surfaces what matters, and stays out of the way.</p>
+                <p>We imagined it as one UX model with two configurations: a static position for standard deployments, and a dynamic, repositionable version that could be moved freely around the screen to accommodate the variability of factory floor workstations. After several rounds of iteration, the solution organized the full set of operator actions, established a clear hierarchy of importance, and presented everything needed without requiring operators to hunt for it.</p>
+                <span class="process-list__label">Questions</span>
+                <ul class="innovation-questions">
+                  <li>How do we design for workstation variability across different factory environments?</li>
+                  <li>What does a functional companion look like on a factory floor?</li>
+                  <li>How do we organize a growing set of functions without overwhelming the operator?</li>
+                </ul>
+                <img src="images/kiosk/toolbar-versions.png" alt="Toolbar versions" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                <p>The toolbar served as the operator's primary control surface giving them affordances to advance through the required steps of a work order, tracking time at each step with pause and resume functionality, and house the actions operators relied on most: viewing step details, accessing attachments, calling for assistance, and triggering the Andon light (They need assistance/attention to their workstation).</p>
+                <p>The most deliberate interaction decision was making it freely repositionable. Factory floors aren't uniform and workstations vary, sight lines differ, and what works at one station creates friction at another. Rather than fixing the toolbar to a position, operators could drag and place it anywhere on the screen, orienting it to their specific setup. No existing pattern covered what this component needed to do. The function, visual design, and interaction model were designed from first principles. However, this surfaced the projects defining tension:</p>
+                <span class="innovation-decisions__heading">Key Decisions — The Toolbar</span>
+                <div class="innovation-decisions">
+                  <p class="innovation-decisions__item">The repositionable toolbar, an interaction decision most directly tied to the realities of the factory floor, was cut from the project scope.</p>
+                  <p class="innovation-decisions__item">While customers had responded favorably to it, the stakeholders deemed the implementation complexity too heavy to include with the build scope.</p>
+                  <p class="innovation-decisions__item">The toolbar shipped with a fixed position and the repositioning logic was documented and added to the backlog.</p>
+                </div>
+                <img src="images/kiosk/scm-design-version.png" alt="SCM design version" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+              </div>
+            </details>
+          </div>
+
+          <!-- Handoff -->
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Handoff</span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>With the design validated internally and signed off across product, engineering, and strategy, our role as the SCM design team was complete and the designs were handed off. The Platform team, the group responsible for the Redwood Design System, was tasked with developing our designs into a net new page template. What we handed off was a fully resolved design direction. What they built from it became the shipped product.</p>
+                <div class="comparison-grid">
+                  <div class="comparison-item">
+                    <img src="images/kiosk/comparison-proposal.png" alt="Our Proposal">
+                  </div>
+                  <div class="comparison-item">
+                    <img src="images/kiosk/comparison-shipped.png" alt="Shipped">
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+        </div>
+      </div>
+
     </section>
 
-    <!-- Section 5 -->
+    <!-- Outcome -->
     <section class="section">
-      <!-- content coming -->
+      <h1 class="section__title">Outcome</h1>
+      <p>The Production Operator Kiosk shipped and is live on factory floors. What started as a proof of concept built to communicate a vision became a real product, built within Oracle's Redwood Design System and deployed into active production environments. The only component without a prior pattern made it through. The Toolbar, while reduced in scope, captured the core of what we set out to build and the purpose built interface for operators who couldn't afford friction is now running on factory floors.</p>
+      <img src="images/kiosk/outcome-hero.jpg" alt="Production Operator Kiosk outcome" class="outcome-hero">
     </section>
 
   </main>
+
+  <div class="return-top-wrap">
+    <button class="return-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">Return to top</button>
+  </div>
 
 </body>
 </html>
