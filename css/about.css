@@ -1,0 +1,254 @@
+/* ─── Custom Fonts ──────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Favorit';
+  src: url('../fonts/Favorit-Regular.woff2') format('woff2'),
+       url('../fonts/Favorit-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Favorit';
+  src: url('../fonts/Favorit-Medium.woff2') format('woff2'),
+       url('../fonts/Favorit-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('../fonts/SuisseIntl-Regular.woff2') format('woff2'),
+       url('../fonts/SuisseIntl-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('../fonts/SuisseIntl-Medium.woff2') format('woff2'),
+       url('../fonts/SuisseIntl-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Reset & Base ──────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --sidebar-width: 300px;
+  --accent: #D4822A;
+  --font-heading: 'Favorit', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Suisse Intl', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #1E1E1E;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Sidebar ───────────────────────────────────────────────── */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: #F5F2EE;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 52px 44px 44px;
+}
+
+.sidebar__top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar__name {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 500;
+  color: #1A1A1A;
+  letter-spacing: -0.3px;
+}
+
+.sidebar__title {
+  font-size: 16px;
+  font-weight: 400;
+  color: #888;
+  line-height: 1.6;
+}
+
+.sidebar__title strong {
+  font-weight: 600;
+  color: #555;
+}
+
+.sidebar__bio {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #666;
+}
+
+/* ─── Nav ───────────────────────────────────────────────────── */
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #999;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: #1A1A1A;
+}
+
+.nav-link--active {
+  color: var(--accent);
+}
+
+/* ─── Main Content ──────────────────────────────────────────── */
+
+.about {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  background: #F5F2EE;
+  padding: 48px;
+  overflow-y: auto;
+}
+
+/* ─── About Content ─────────────────────────────────────────── */
+
+.about-section {
+  margin-bottom: 56px;
+}
+
+.about-heading {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 500;
+  color: #1A1A1A;
+  letter-spacing: -0.5px;
+  margin-bottom: 32px;
+}
+
+.about-subheading {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 14px;
+}
+
+.about-block {
+  margin-bottom: 40px;
+}
+
+.about-block:last-child {
+  margin-bottom: 0;
+}
+
+.about-body {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #444;
+}
+
+/* ─── Experience ────────────────────────────────────────────── */
+
+.experience-list {
+  list-style: none;
+}
+
+.experience-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #E0DDD8;
+  font-size: 14px;
+}
+
+.experience-item:first-child {
+  border-top: 1px solid #E0DDD8;
+}
+
+.experience-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.experience-company {
+  font-weight: 500;
+  color: #1A1A1A;
+  flex: 1;
+}
+
+.experience-role {
+  font-weight: 400;
+  color: #777;
+}
+
+.experience-years {
+  font-weight: 400;
+  color: #999;
+  margin-left: 24px;
+  white-space: nowrap;
+}
+
+/* ─── Two Column ────────────────────────────────────────────── */
+
+.about-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+/* ─── Toolkit ───────────────────────────────────────────────── */
+
+.toolkit-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.toolkit-pill {
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+  background: #EAE7E2;
+  border: 1px solid #D8D4CE;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
