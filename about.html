@@ -7,7 +7,54 @@
   <link rel="stylesheet" href="css/styles.css">
   <style>
     body { background: #1E1E1E; }
-    .about { border-radius: 0 8px 8px 0; }
+    .about {
+      background: #F5F2EE;
+      border-radius: 12px;
+      margin: 16px 16px 16px calc(var(--sidebar-width) + 16px);
+      height: calc(100vh - 32px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .about::-webkit-scrollbar { display: none; }
+    .about-heading { color: #1A1A1A; }
+    .about-subheading { color: #999; }
+    .about-body { color: #444; }
+    .experience-company { color: #1A1A1A; }
+    .experience-role { color: #777; }
+    .experience-years { color: #999; }
+    .experience-item { border-color: #E0DDD8; }
+    .toolkit-pill {
+      background: #EAE7E2;
+      border-color: #D8D4CE;
+      color: #555;
+    }
+    .experience-logo {
+      width: auto;
+      max-width: 72px;
+      height: 20px;
+      object-fit: contain;
+    }
+    .about-photo-grid {
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .photo-grid__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .photo-grid__img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+.photo-grid__row .photo-grid__img {
+      height: 450px;
+    }
   </style>
 </head>
 <body>
@@ -46,19 +93,19 @@
         <h2 class="about-subheading">Experience</h2>
         <ul class="experience-list">
           <li class="experience-item">
-            <img src="images/oracle-logo.png" alt="Oracle" class="experience-logo">
+            <img src="images/AboutMe/Oracle-Logo-Black.png" alt="Oracle" class="experience-logo">
             <span class="experience-company">Oracle</span>
             <span class="experience-role">Senior UX Designer</span>
             <span class="experience-years">2025–2026</span>
           </li>
           <li class="experience-item">
-            <img src="images/oracle-logo.png" alt="Oracle" class="experience-logo">
+            <img src="images/AboutMe/Oracle-Logo-Black.png" alt="Oracle" class="experience-logo">
             <span class="experience-company">Oracle</span>
             <span class="experience-role">UX Designer</span>
             <span class="experience-years">2022–2025</span>
           </li>
           <li class="experience-item">
-            <img src="images/payactiv-logo.png" alt="Payactiv" class="experience-logo">
+            <img src="images/AboutMe/payactiv-logo.png" alt="Payactiv" class="experience-logo">
             <span class="experience-company">Payactiv</span>
             <span class="experience-role">UX Designer</span>
             <span class="experience-years">2021–2022</span>
@@ -98,6 +145,26 @@
         <h2 class="about-subheading">Why Enterprise &amp; Industrial</h2>
         <p class="about-body">Complex environments have always made sense to me. I've spent my life wanting to understand why someone would do something a certain way, I'd be curious of what drives their behavior, what do they actually need? Enterprise and industrial design gave me the hardest version of that problem: users under pressure, systems with real consequences, and no room for friction. That's exactly where I want to work.</p>
       </div>
+    </section>
+
+    <!-- Section 5: Photo Grid -->
+    <section class="about-section about-photo-grid">
+      <img src="images/AboutMe/Photos/MountainRidge.png" alt="" class="photo-grid__img photo-grid__img--full">
+      <div class="photo-grid__row">
+        <img src="images/AboutMe/Photos/HillSmudge.png" alt="" class="photo-grid__img">
+        <img src="images/AboutMe/Photos/NorCalCabin.png" alt="" class="photo-grid__img">
+      </div>
+      <img src="images/AboutMe/Photos/Deer.png" alt="" class="photo-grid__img photo-grid__img--full">
+      <div class="photo-grid__row">
+        <img src="images/AboutMe/Photos/DuskSF.png" alt="" class="photo-grid__img">
+        <img src="images/AboutMe/Photos/TheSeats.png" alt="" class="photo-grid__img">
+      </div>
+      <img src="images/AboutMe/Photos/Books.png" alt="" class="photo-grid__img photo-grid__img--full">
+      <div class="photo-grid__row">
+        <img src="images/AboutMe/Photos/Oak.png" alt="" class="photo-grid__img">
+        <img src="images/AboutMe/Photos/BART.png" alt="" class="photo-grid__img">
+      </div>
+      <img src="images/AboutMe/Photos/Oak-Rain.png" alt="" class="photo-grid__img photo-grid__img--full">
     </section>
 
   </main>
