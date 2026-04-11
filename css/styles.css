@@ -62,17 +62,21 @@ body {
   display: flex;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  background: #F5F2EE;
 }
 
 /* ─── Sidebar ───────────────────────────────────────────────── */
 
 .sidebar {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 16px;
+  left: 16px;
   width: var(--sidebar-width);
-  height: 100vh;
-  background: var(--bg-sidebar);
+  height: calc(100vh - 32px);
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.10);
+  z-index: 10;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -118,11 +122,12 @@ body {
 .sidebar__nav {
   display: flex;
   flex-direction: row;
-  gap: 24px;
+  justify-content: center;
+  gap: 40px;
 }
 
 .nav-link {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: #999;
   text-decoration: none;
@@ -140,7 +145,7 @@ body {
 /* ─── About ─────────────────────────────────────────────────── */
 
 .about {
-  margin-left: var(--sidebar-width);
+  margin-left: calc(var(--sidebar-width) + 16px);
   min-height: 100vh;
   background: #F5F2EE;
   padding: 48px;
@@ -262,11 +267,11 @@ body {
 /* ─── Projects ──────────────────────────────────────────────── */
 
 .projects {
-  margin-left: var(--sidebar-width);
-  width: calc(100% - var(--sidebar-width));
+  margin-left: calc(var(--sidebar-width) + 16px);
+  width: calc(100% - var(--sidebar-width) - 16px);
   height: 100vh;
   overflow-y: auto;
-  background: var(--bg-main);
+  background: #F5F2EE;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -289,6 +294,7 @@ body {
   padding: 32px 44px;
   background: #272727;
   border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10);
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -301,7 +307,6 @@ body {
   text-decoration: none;
   color: inherit;
   position: relative;
-  overflow: hidden;
   background: #2A2A2A;
 }
 
