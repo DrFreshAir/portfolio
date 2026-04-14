@@ -378,6 +378,7 @@ details[open] .accordion__icon {
 
 .accordion__body {
   padding-top: 20px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 0;
