@@ -123,7 +123,7 @@ body {
 /* ─── Case Study Layout ─────────────────────────────────────── */
 
 .case-study {
-  padding: 96px 48px 140px;
+  padding: 96px 20% 140px;
 }
 
 /* ─── Sections ──────────────────────────────────────────────── */
@@ -201,12 +201,10 @@ p + p {
   line-height: 1.0;
 }
 
-.overview__columns {
-  display: grid;
-  grid-template-columns: 1.22fr 1fr;
-  column-gap: 120px;
-  row-gap: 48px;
-  align-items: start;
+.overview__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 }
 
 .overview__block {}
@@ -617,6 +615,18 @@ details[open] .accordion__icon {
   font-weight: 500;
   color: var(--text-muted);
   text-align: center;
+}
+
+/* ─── Team ──────────────────────────────────────────────────── */
+
+.team__heading {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.team--centered {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* ─── Outcome ────────────────────────────────────────────────── */
