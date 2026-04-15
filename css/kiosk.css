@@ -204,32 +204,30 @@ p + p {
 .overview__columns {
   display: grid;
   grid-template-columns: 1.22fr 1fr;
-  gap: 120px;
+  column-gap: 120px;
+  row-gap: 48px;
   align-items: start;
 }
 
-.overview__block {
-  margin-bottom: 48px;
-}
-
-.overview__block:last-child {
-  margin-bottom: 0;
-}
+.overview__block {}
 
 /* Objectives list */
 
 .overview__list {
   list-style: disc;
   padding-left: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: block;
+  margin-top: 16px;
 }
 
 .overview__list li {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+  display: list-item;
+  margin-bottom: 10px;
+}
+
+.overview__list li .obj__sub {
+  display: block;
+  margin-top: 3px;
 }
 
 .obj__main {
