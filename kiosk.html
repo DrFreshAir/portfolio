@@ -8,13 +8,39 @@
 </head>
 <body>
 
-  <!-- Nav bar -->
-  <nav class="topbar">
-    <a href="index.html" class="back-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
-      Back
-    </a>
-  </nav>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar__top">
+      <a href="index.html" class="sidebar__back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
+        Work
+      </a>
+      <div class="sidebar__project">
+        <span class="sidebar__project-meta">Enterprise · 0→1 · 2023</span>
+        <h2 class="sidebar__project-title">Production Operator Kiosk</h2>
+      </div>
+    </div>
+
+    <nav class="toc" aria-label="Table of contents">
+      <span class="toc__label">On this page</span>
+      <ol class="toc__list">
+        <li><a href="#project-overview" class="toc__link"><span class="toc__hash">#</span>Project Overview</a></li>
+        <li><a href="#what-we-delivered" class="toc__link"><span class="toc__hash">#</span>What We Delivered</a></li>
+        <li><a href="#where-we-started" class="toc__link"><span class="toc__hash">#</span>Where We Started</a></li>
+        <li><a href="#the-process" class="toc__link"><span class="toc__hash">#</span>The Process</a></li>
+        <li><a href="#team" class="toc__link"><span class="toc__hash">#</span>Team</a></li>
+      </ol>
+    </nav>
+
+    <nav class="sidebar__nav">
+      <a href="index.html" class="nav-link nav-link--active">Work</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </aside>
+
+  <!-- Content Wrap -->
+  <div class="content-wrap">
 
   <!-- Hero -->
   <section class="hero">
@@ -24,7 +50,7 @@
   <main class="case-study">
 
     <!-- Project Overview -->
-    <section class="section overview">
+    <section class="section overview" id="project-overview">
       <h1 class="section__title">Project Overview</h1>
 
       <div class="overview__stack">
@@ -59,7 +85,7 @@
     </section>
 
     <!-- What we delivered -->
-    <section class="section">
+    <section class="section" id="what-we-delivered">
       <h1 class="section__title">What we delivered</h1>
       <p>The Production Operator Kiosk shipped and is live on factory floors. What started as a proof of concept built to communicate a vision became a real product, built within Oracle's Redwood Design System and deployed into active production environments.</p>
       <p>The only component without a prior pattern made it through. The Toolbar, focused to its essential function, captured the core of what we set out to build.</p>
@@ -68,7 +94,7 @@
     </section>
 
     <!-- Existing Screens -->
-    <section class="section">
+    <section class="section" id="where-we-started">
       <h1 class="section__title">Where we started</h1>
       <div class="accordion">
         <div class="accordion__card">
@@ -86,7 +112,7 @@
     </section>
 
     <!-- Process -->
-    <section class="section">
+    <section class="section" id="the-process">
       <h1 class="section__title">What the process looked like</h1>
       <div class="phase-overview">
         <div class="phase-card">
@@ -349,7 +375,7 @@
     </section>
 
     <!-- Team -->
-    <section class="section">
+    <section class="section" id="team">
       <h2 class="team__heading">Team</h2>
       <ul class="overview__team team--centered">
         <li><span class="team__name">Jennifer Darmour</span><span class="team__role">SVP</span></li>
@@ -366,6 +392,24 @@
     <button class="return-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">Return to top</button>
   </div>
 
+  </div><!-- /.content-wrap -->
+
+  <script>
+    const sections = document.querySelectorAll('section[id]');
+    const tocLinks = document.querySelectorAll('.toc__link');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('toc__link--active'));
+          const active = document.querySelector(`.toc__link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('toc__link--active');
+        }
+      });
+    }, { rootMargin: '-10% 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
   <script defer src='/_vercel/insights/script.js'></script>
 </body>
 </html>
