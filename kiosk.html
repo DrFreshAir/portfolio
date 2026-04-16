@@ -8,44 +8,38 @@
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar__top">
-      <a href="index.html" class="sidebar__back">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
-        Work
-      </a>
-      <div class="sidebar__project">
-        <span class="sidebar__project-meta">Enterprise · 0→1 · 2023</span>
-        <h2 class="sidebar__project-title">Production Operator Kiosk</h2>
-      </div>
-    </div>
-
-    <nav class="toc" aria-label="Table of contents">
-      <span class="toc__label">On this page</span>
-      <ol class="toc__list">
-        <li><a href="#project-overview" class="toc__link"><span class="toc__hash">#</span>Project Overview</a></li>
-        <li><a href="#what-we-delivered" class="toc__link"><span class="toc__hash">#</span>What We Delivered</a></li>
-        <li><a href="#where-we-started" class="toc__link"><span class="toc__hash">#</span>Where We Started</a></li>
-        <li><a href="#the-process" class="toc__link"><span class="toc__hash">#</span>The Process</a></li>
-        <li><a href="#team" class="toc__link"><span class="toc__hash">#</span>Team</a></li>
-      </ol>
-    </nav>
-
-    <nav class="sidebar__nav">
-      <a href="index.html" class="nav-link nav-link--active">Work</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="contact.html" class="nav-link">Contact</a>
-    </nav>
-  </aside>
-
-  <!-- Content Wrap -->
-  <div class="content-wrap">
+  <!-- Nav bar -->
+  <nav class="topbar">
+    <a href="index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
+      Back
+    </a>
+  </nav>
 
   <!-- Hero -->
   <section class="hero">
     <img src="images/kiosk/hero-illustration.png" alt="Production Operator Kiosk hero">
   </section>
+
+  <div class="case-layout">
+
+    <!-- Table of Contents -->
+    <nav class="toc" aria-label="Table of contents">
+      <span class="toc__label">Contents</span>
+      <ol class="toc__list">
+        <li><a href="#project-overview" class="toc__link">Project Overview</a></li>
+        <li><a href="#what-we-delivered" class="toc__link">What We Delivered</a></li>
+        <li><a href="#where-we-started" class="toc__link">Where We Started</a></li>
+        <li>
+          <a href="#the-process" class="toc__link">The Process</a>
+          <ol class="toc__sub">
+            <li><a href="#phase-1" class="toc__sub-link">Research &amp; Definition</a></li>
+            <li><a href="#phase-2" class="toc__sub-link">Interaction Modeling</a></li>
+            <li><a href="#phase-3" class="toc__sub-link">High Fidelity</a></li>
+          </ol>
+        </li>
+      </ol>
+    </nav>
 
   <main class="case-study">
 
@@ -135,7 +129,7 @@
       <hr class="phase-divider">
 
       <!-- Phase 1 -->
-      <div class="phase">
+      <div class="phase" id="phase-1">
         <h2 class="phase__heading">Phase 1 – Research and Definition</h2>
         <p class="phase__summary">We needed to know if Oracle's Redwood Design System could support a kiosk interface before committing to a custom build. I audited every available page template, mapped them against the proposed demo, and documented where they aligned and where they fell short. Nothing worked as-is but the audit surfaced reusable patterns that would reduce the scope of net-new work. The team aligned on a full custom route and engineering committed resources to support it.</p>
         <div class="accordion">
@@ -205,7 +199,7 @@
       </div>
 
       <!-- Phase 2 -->
-      <div class="phase">
+      <div class="phase" id="phase-2">
         <h2 class="phase__heading">Phase 2 – Interaction Modeling</h2>
         <p class="phase__summary">With no existing pattern to build from, we developed four distinct interaction models, each representing a different philosophy for solving the Operator's constraints. MiniFlex was selected: it met core operator needs while limiting net new work, freeing the team to focus on the one component that had no precedent.</p>
         <div class="phase__constraints">
@@ -287,7 +281,7 @@
       </div>
 
       <!-- Phase 3 -->
-      <div class="phase">
+      <div class="phase" id="phase-3">
         <h2 class="phase__heading">Phase 3 – High Fidelity</h2>
         <p class="phase__summary">Five core components were identified across all interaction models. Most had close Redwood equivalents to adapt from. One did not. The toolbar, the operator's primary control surface, was designed from first principles. Inspired by functional companions like the Dynamic Island and motorsport timing displays, it organized navigation, time tracking, and operator actions into a single container built for the edge of the experience. The designs were handed off to the Platform team and developed into a net new Redwood page template.</p>
         <div class="accordion">
@@ -388,27 +382,38 @@
 
   </main>
 
+  </div><!-- /.case-layout -->
+
   <div class="return-top-wrap">
     <button class="return-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">Return to top</button>
   </div>
 
-  </div><!-- /.content-wrap -->
-
   <script>
-    const sections = document.querySelectorAll('section[id]');
-    const tocLinks = document.querySelectorAll('.toc__link');
+    const allLinks = document.querySelectorAll('.toc__link, .toc__sub-link');
+    const targets = [...allLinks]
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        const id = entry.target.id;
+        const link = document.querySelector(`.toc__link[href="#${id}"], .toc__sub-link[href="#${id}"]`);
+        if (!link) return;
+        const activeClass = link.classList.contains('toc__sub-link') ? 'toc__sub-link--active' : 'toc__link--active';
+
         if (entry.isIntersecting) {
-          tocLinks.forEach(link => link.classList.remove('toc__link--active'));
-          const active = document.querySelector(`.toc__link[href="#${entry.target.id}"]`);
-          if (active) active.classList.add('toc__link--active');
+          allLinks.forEach(l => l.classList.remove('toc__link--active', 'toc__sub-link--active'));
+          link.classList.add(activeClass);
+        } else if (entry.boundingClientRect.top < 0) {
+          link.classList.remove(activeClass);
+          link.classList.add('toc__link--seen');
+        } else {
+          link.classList.remove(activeClass, 'toc__link--seen');
         }
       });
     }, { rootMargin: '-10% 0px -60% 0px', threshold: 0 });
 
-    sections.forEach(s => observer.observe(s));
+    targets.forEach(t => observer.observe(t));
   </script>
   <script defer src='/_vercel/insights/script.js'></script>
 </body>
