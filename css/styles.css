@@ -80,7 +80,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 52px 44px 44px;
+  padding: 52px 44px 28px;
 }
 
 .sidebar__top {
@@ -147,11 +147,11 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 40px;
+  gap: 52px;
 }
 
 .nav-link {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   color: #999;
   text-decoration: none;
