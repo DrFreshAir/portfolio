@@ -452,7 +452,7 @@ p + p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 12px 0;
   font-size: 16px;
   font-weight: 500;
   color: var(--text-primary);
@@ -463,6 +463,14 @@ p + p {
 
 .accordion__label::-webkit-details-marker {
   display: none;
+}
+
+.accordion__sublabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 3px;
 }
 
 .accordion__icon {
@@ -564,6 +572,14 @@ details[open] .accordion__icon {
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--text-muted);
+}
+
+.phase-card__summary {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 .phase-card__action {
