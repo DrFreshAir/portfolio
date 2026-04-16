@@ -148,6 +148,10 @@ body {
   color: #1A1A1A;
 }
 
+.sidebar__bio + .sidebar__bio {
+  padding-right: 48px;
+}
+
 /* ─── Nav ───────────────────────────────────────────────────── */
 
 .sidebar__nav {
