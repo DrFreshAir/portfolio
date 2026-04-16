@@ -344,11 +344,32 @@ body {
   background-position: center;
   opacity: 0.2;
   border-radius: 12px;
+  transition: opacity 0.4s ease;
+}
+
+.project-card--linked:hover::before {
+  opacity: 0;
+}
+
+.project-card--linked::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/kiosk/outcome-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  border-radius: 12px;
+  transition: opacity 0.4s ease;
 }
 
 .project-card--linked:hover {
   background: #2d2d2d;
   filter: brightness(1.15);
+}
+
+.project-card--linked:hover::after {
+  opacity: 0.2;
 }
 
 .project-card__logo {
