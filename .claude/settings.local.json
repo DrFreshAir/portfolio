@@ -3,7 +3,11 @@
     "allow": [
       "Bash(open:*)",
       "Bash(npx serve *)",
-      "Bash(sips -g pixelWidth -g pixelHeight /Users/traviscantrell/portfolio/images/AboutMe/payactiv-logo.png /Users/traviscantrell/portfolio/images/AboutMe/Oracle-Logo-Black.png)"
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/traviscantrell/portfolio/images/AboutMe/payactiv-logo.png /Users/traviscantrell/portfolio/images/AboutMe/Oracle-Logo-Black.png)",
+      "Bash(mkdir -p /Users/traviscantrell/portfolio/images/logos)",
+      "Bash(curl -sL \"https://simpleicons.org/icons/figma.svg\" -o figma.svg)",
+      "Bash(curl -sL \"https://simpleicons.org/icons/anthropic.svg\" -o claude.svg)",
+      "Bash(curl -sL \"https://simpleicons.org/icons/google.svg\" -o google.svg)"
     ]
   }
 }

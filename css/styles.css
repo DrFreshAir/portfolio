@@ -362,7 +362,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../images/kiosk/outcome-hero.jpg');
+  background-image: url('../images/kiosk/outcome-hero-dimmed.png');
   background-size: cover;
   background-position: top center;
   opacity: 0;

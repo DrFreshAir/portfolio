@@ -6,6 +6,9 @@
   <title>Travis Cantrell — UX Designer</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
+    .project-card--ai {
+      isolation: isolate;
+    }
     .project-card--ai::before {
       content: '';
       position: absolute;
@@ -13,8 +16,9 @@
       background-image: url('images/AI/TitleCard.png');
       background-size: cover;
       background-position: center;
-      opacity: 0.25;
+      opacity: 0.2;
       border-radius: 12px;
+      z-index: -1;
     }
   </style>
 </head>
