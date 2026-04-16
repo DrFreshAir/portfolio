@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(open:*)",
-      "Bash(npx serve *)"
+      "Bash(npx serve *)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/traviscantrell/portfolio/images/AboutMe/payactiv-logo.png /Users/traviscantrell/portfolio/images/AboutMe/Oracle-Logo-Black.png)"
     ]
   }
 }

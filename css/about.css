@@ -192,7 +192,7 @@ body {
 .experience-item {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   padding: 14px 0;
   border-bottom: 1px solid #E0DDD8;
   font-size: 14px;
@@ -203,9 +203,10 @@ body {
 }
 
 .experience-logo {
-  width: 20px;
+  width: 40px;
   height: 20px;
   object-fit: contain;
+  object-position: center;
   flex-shrink: 0;
 }
 
