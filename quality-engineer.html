@@ -5,6 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Quality Engineer Tool — Travis Cantrell</title>
   <link rel="stylesheet" href="css/kiosk.css">
+  <style>
+    .hero {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      overflow: hidden;
+    }
+    .hero img {
+      transform: scale(1.12);
+    }
+
+    /* ─── Lightbox ─── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox__img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.6);
+    }
+    .lightbox__close {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-family: 'Suisse Intl', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .lightbox__close:hover { background: rgba(255,255,255,0.18); }
+    .lightbox__backdrop {
+      position: absolute;
+      inset: 0;
+    }
+    .lightbox__content { position: relative; z-index: 1; }
+    .lightbox-trigger {
+      cursor: zoom-in;
+      transition: opacity 0.15s ease;
+    }
+    .lightbox-trigger:hover { opacity: 0.85; }
+  </style>
 </head>
 <body>
 
@@ -18,7 +77,7 @@
 
   <!-- Hero -->
   <section class="hero">
-    <img src="images/kiosk/hero-illustration.png" alt="Production Operator Kiosk hero">
+    <img src="images/quality/Oracle.png" alt="AI Quality Engineer Tool hero">
   </section>
 
   <div class="case-layout">
@@ -33,9 +92,8 @@
         <li>
           <a href="#the-process" class="toc__link">The Process</a>
           <ol class="toc__sub">
-            <li><a href="#phase-1" class="toc__sub-link">Research &amp; Definition</a></li>
-            <li><a href="#phase-2" class="toc__sub-link">Interaction Modeling</a></li>
-            <li><a href="#phase-3" class="toc__sub-link">High Fidelity</a></li>
+            <li><a href="#phase-1" class="toc__sub-link">Problem Framing</a></li>
+            <li><a href="#phase-2" class="toc__sub-link">Interaction Design</a></li>
           </ol>
         </li>
       </ol>
@@ -72,6 +130,7 @@
       <h1 class="section__title">What we delivered</h1>
       <p>In one month, the project went from a stakeholder mandate and an empty page template to a fully defined agentic investigation workspace with three specialized AI advisors, a node-based navigation model for context switching across product genealogies, and an interaction framework that makes AI reasoning auditable at every layer.</p>
       <img src="images/quality/GenealogySummary.png" alt="Genealogy Summary" class="outcome-hero" style="width: 100%;">
+      <img src="images/quality/SummaryAO.png" alt="Summary AO" class="outcome-hero" style="width: 100%;">
     </section>
 
     <!-- Existing Screens -->
@@ -81,11 +140,11 @@
         <div class="accordion__card">
           <details class="accordion__item" open>
             <summary class="accordion__label">
-              <span>Proof of Concept</span>
+              <span>Functional Design Overview</span>
               <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
             </summary>
             <div class="accordion__body">
-              <img src="images/kiosk/proofofconcept.png" alt="Proof of Concept" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+              <img src="images/quality/wherewestarted.png" alt="Where We Started" style="width: 100%; height: auto; display: block; border-radius: 8px;">
             </div>
           </details>
         </div>
@@ -112,28 +171,31 @@
 
       <!-- Phase 1 -->
       <div class="phase" id="phase-1">
-        <h2 class="phase__heading">Phase 1 – Research and Definition</h2>
-        <p class="phase__summary">We needed to know if Oracle's Redwood Design System could support a kiosk interface before committing to a custom build. I audited every available page template, mapped them against the proposed demo, and documented where they aligned and where they fell short. Nothing worked as-is but the audit surfaced reusable patterns that would reduce the scope of net-new work. The team aligned on a full custom route and engineering committed resources to support it.</p>
+        <h2 class="phase__heading">Phase 1 – Problem Framing</h2>
+        <p class="phase__summary">The PM had documented the requirements — the what. Phase 1 was about understanding the problem deeply enough to define the how. That meant learning the quality engineer's current process, discovering that investigations are cyclical rather than linear, and organizing the system architecture around four investigative questions that would become the foundation for everything designed in Phase 2.</p>
         <div class="accordion">
 
           <div class="accordion__card">
             <details class="accordion__item">
               <summary class="accordion__label">
-                <span>Audit<span class="accordion__sublabel">Audited Redwood templates against the demo to find reusable patterns before design began.</span></span>
+                <span>Understanding the Requirements<span class="accordion__sublabel">Learned the quality engineer's current process and identified where the real gap was.</span></span>
                 <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </summary>
               <div class="accordion__body">
                 <div class="process-lists">
                   <div class="process-list">
-                    <p>Before any design decisions could be made, we needed to understand what already existed. I conducted a full audit of the available Redwood page templates documenting each one and cataloging the patterns they included. As we built our comparison matrix we began mapping them against the proposed demo to identify where they aligned and where they fell short.</p>
-                    <p>This research helped us not only identify what was available, but what could be altered to fit our needs. Even in a custom build scenario, identifying viable starting points within Redwood meant we weren't starting from zero on every page, reducing the scope of net new work and giving engineering a faster path to implementation.</p>
+                    <p>The PM had documented the requirements and the quality engineer's current process. The gap wasn't a lack of tools — Oracle's products contained the data quality engineers needed. The problem was navigating them. Engineers had to search across isolated, fractured modules with very little help identifying where to look. The containers were in front of them but finding the right information inside them was a needle-in-the-haystack effort.</p>
+                    <p>The output of this entire process is a Problem Report — an auditable artifact that validates what the engineer found, what was affected, and what actions were taken. Every claim in the report needs to be correct and traceable. The stakes aren't just operational — they're regulatory.</p>
                   </div>
                   <div class="process-list">
                     <span class="process-list__label">Questions</span>
                     <ul class="process-list__items">
-                      <li>Can any existing Redwood templates be used as-is?</li>
-                      <li>Where existing templates fall short, are there patterns we can use as a starting point for custom development?</li>
-                      <li>If custom development is required, what is the most viable path forward?</li>
+                      <li>Where does the current process break down most — in finding the data, interpreting it, or connecting it across systems?</li>
+                      <li>What does a quality engineer actually navigate today to build a Problem Report?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>The data existed. The tools existed. What didn't exist was a way to move through them that matched how an investigation actually unfolds.</li>
                     </ul>
                   </div>
                 </div>
@@ -142,24 +204,34 @@
           </div>
 
           <div class="accordion__card">
-            <details class="accordion__item">
+            <details class="accordion__item" open>
               <summary class="accordion__label">
-                <span>Analysis<span class="accordion__sublabel">Evaluated each template against the wireframes, cataloging viable patterns and surfacing the critical gaps.</span></span>
+                <span>Mapping the Investigation Flow<span class="accordion__sublabel">Revealed that investigations are cyclical, not linear — each finding opens new questions.</span></span>
                 <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </summary>
               <div class="accordion__body">
                 <div class="process-lists">
                   <div class="process-list">
-                    <p>With the audit complete, we evaluated each template against the wireframes and documented our findings. For every template we captured what worked, what didn't, and why. Nothing was a direct match, but not everything was dismissed either. Viable patterns were cataloged as candidates for the custom build phase, giving us a library of starting points rather than a blank canvas.</p>
+                    <p>Mapping the full investigation process revealed something the requirements didn't capture: Problem Reports aren't constructed linearly. They're cyclical. One suspect leads to another — a flagged Marinara Sauce lot might trace to sour Tomato Paste, an incorrect Citric Acid measurement, or bad tomatoes at the source. Each finding opens new questions. What other lots used those ingredients? Are there other products out there that might be affected? When was that shipment? What truck?</p>
+                    <p>Or it's not the ingredients at all — it's a process deviation. The viscosity is off. Did a machine malfunction? Did an operator miss a step? Each answer reframes the investigation.</p>
+                    <p>What started as a simple A-to-Z diagram became an interwoven, self-educating process. The flow diagram grew to reflect that reality — branching, looping back, and expanding scope as new evidence surfaced.</p>
                   </div>
                   <div class="process-list">
-                    <span class="process-list__label">Key Insights</span>
+                    <span class="process-list__label">Questions</span>
                     <ul class="process-list__items">
-                      <li>Though nothing in the Redwood Design System could be used as-is, the audit surfaced a strong foundation of patterns to leverage as we began designing new solutions.</li>
-                      <li>The most significant gap identified at this stage was that no existing control surface could deliver the functionality the product required.</li>
+                      <li>How far has this contaminated material spread?</li>
+                      <li>Is there a likely source for the issue?</li>
+                      <li>Did something physically deviate on the manufacturing floor?</li>
+                      <li>Is this a known recurring issue, or an isolated event?</li>
+                      <li>Are containment teams aware and executing?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>Investigations are cyclical and subjective to what you're finding. The tool needed to support an engineer going deeper into the genealogy without losing the thread of where they started.</li>
                     </ul>
                   </div>
                 </div>
+                <img src="images/quality/Genealogy_UserFlow.png" alt="Genealogy User Flow" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px; margin-top: 24px;" data-lightbox="images/quality/Genealogy_UserFlow.png">
               </div>
             </details>
           </div>
@@ -167,12 +239,22 @@
           <div class="accordion__card">
             <details class="accordion__item">
               <summary class="accordion__label">
-                <span>Alignment<span class="accordion__sublabel">Aligned design and engineering on a full custom build, securing the resourcing required to see it through.</span></span>
+                <span>Defining the Advisor Architecture<span class="accordion__sublabel">Organized existing data domains into a framework of four investigative questions.</span></span>
                 <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </summary>
               <div class="accordion__body">
-                <p>Committing to a custom build wasn't just a design decision, it was a resourcing commitment. The audit and analysis made clear that neither native Redwood templates nor a hybrid approach could meet the product requirements, but moving forward meant getting engineering to the table and aligned on scope.</p>
-                <p>Design and development reviewed the findings together, agreed on the path, and committed the resources to see it through. From this point forward, the project had full cross-functional backing, not just design conviction.</p>
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>The categories for the advisors weren't invented — they already existed as isolated data points across Oracle's products. The design move was recognizing that each one answered a distinct investigative question and organizing them into a framework simple enough to navigate.</p>
+                    <p>Domain-specific terminology made the system legible internally, but framing each advisor around a foundational question made the architecture intuitive: What was affected? Where was it found? Why did it fail? When has this been an issue? Four questions, three specialized advisors to answer them, and one orchestrator to hold the investigation together.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>The 4W's gave the advisor system a logic that transcended domain terminology. A quality engineer doesn't need to know they're using the "Transactional Intelligence Advisor" — they need to know they're answering why did this fail.</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </details>
           </div>
@@ -182,50 +264,63 @@
 
       <!-- Phase 2 -->
       <div class="phase" id="phase-2">
-        <h2 class="phase__heading">Phase 2 – Interaction Modeling</h2>
-        <p class="phase__summary">With no existing pattern to build from, we developed four distinct interaction models, each representing a different philosophy for solving the Operator's constraints. MiniFlex was selected: it met core operator needs while limiting net new work, freeing the team to focus on the one component that had no precedent.</p>
-        <div class="phase__constraints">
-          <span class="phase__constraints-label">Constraints</span>
-          <div class="context-grid">
-            <div class="context-card">
-              <span class="context-card__label">Input</span>
-              <p class="context-card__statement">Gloved hands; no precision touch.</p>
-            </div>
-            <div class="context-card">
-              <span class="context-card__label">Time</span>
-              <p class="context-card__statement">Interactions measured in seconds, not minutes.</p>
-            </div>
-            <div class="context-card">
-              <span class="context-card__label">Environment</span>
-              <p class="context-card__statement">Active production floor, divided attention.</p>
-            </div>
-            <div class="context-card">
-              <span class="context-card__label">Consequences</span>
-              <p class="context-card__statement">Errors affect downstream production.</p>
-            </div>
-          </div>
-        </div>
+        <h2 class="phase__heading">Phase 2 – Interaction Design</h2>
+        <p class="phase__summary">With the investigative flow mapped and the advisor architecture defined, Phase 2 turned to the harder question: how should this system actually feel to use? The template was a container, not a solution. Designing inside-out and letting the template dictate the interactions would have produced something structurally sound but operationally hollow. Designing outside-in meant starting from the engineer's reality and making the container adapt. That choice shaped everything that followed: how the engineer moves through an investigation, what surfaces first, and how the AI's reasoning stays visible at every layer.</p>
         <div class="accordion">
 
           <div class="accordion__card">
             <details class="accordion__item">
               <summary class="accordion__label">
-                <span>Reset<span class="accordion__sublabel">Stripped everything down to its core to explore interaction models without the constraints of fidelity.</span></span>
+                <span>How the engineer uses the template<span class="accordion__sublabel">Restoring the engineer's existing mental model to its intended weight.</span></span>
                 <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </summary>
               <div class="accordion__body">
                 <div class="process-lists">
                   <div class="process-list">
-                    <p>With no existing pattern to build from we returned to basics. Rather than forcing fidelity too early, we stripped everything back to gray boxes and began broadly drawing interaction models that could satisfy the product requirements. Each model was shaped by the original demo as a reference point, the constraints we were designing within, and the design sensibility of the team.</p>
+                    <p>Quality engineers already had a working mental model: validate, decide, communicate. The problem wasn't the model. It was the infrastructure. Fragmented tools meant engineers spent more time hunting for data than investigating.</p>
+                    <p>The template's job was to get out of the way. Validate stops meaning "search five systems" and starts meaning "review what surfaced." Decide stops meaning "cross-reference manually" and starts meaning "approve the AI's recommendation." Communicate stops meaning "assemble the report" and starts meaning "synthesize findings into an auditable document."</p>
                   </div>
                   <div class="process-list">
                     <span class="process-list__label">Questions</span>
                     <ul class="process-list__items">
-                      <li>How does an operator move through a work order?</li>
-                      <li>What does the primary interaction model look like?</li>
-                      <li>What does the screen need to surface at any given moment, and what can be secondary?</li>
-                      <li>How do we honor the demo's vision while designing for the constraints the demo ignored?</li>
-                      <li>What interaction patterns have our customers already responded to that we can draw from?</li>
+                      <li>What does the engineer actually do today, and where does the current process fail them?</li>
+                      <li>Where should the template stay out of the way, and where should it actively help?</li>
+                      <li>How do we design for a mental model we don't want to replace?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>The mental model wasn't the design problem — the infrastructure was. The template succeeds when it disappears.</li>
+                    </ul>
+                  </div>
+                </div>
+                <img src="images/quality/Genealogy_DataArchitecture.png" alt="Genealogy Data Architecture" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px; margin-top: 24px;" data-lightbox="images/quality/Genealogy_DataArchitecture.png">
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>How they navigate<span class="accordion__sublabel">Making the data itself the map.</span></span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>A quality investigation moves through relationships, not categories. A suspect lot points to its parent, to siblings, to the work order, to the operator. Every node is both a destination and a lead.</p>
+                    <p>The node-based model lets each item recontextualize the workspace around it. Context becomes the wayfinding. The navigation nests — moving from Summary headlines to advisor reasoning and finally individual records. Each layer deepens visibility and builds trust between engineer and the AI layer.</p>
+                    <p>Through iteration, the natural language interface ended up carrying more weight than planned. It answers scoped to where the engineer is, and runs as a parallel navigation layer for when asking is faster than clicking.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>How does the engineer move through the investigation without losing context?</li>
+                      <li>What does navigation look like when investigations branch and loop back?</li>
+                      <li>How do we show the AI's reasoning without burying the engineer in data?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>Context becomes the wayfinding. Nesting is the transparency, and natural language runs alongside it.</li>
                     </ul>
                   </div>
                 </div>
@@ -236,109 +331,27 @@
           <div class="accordion__card">
             <details class="accordion__item">
               <summary class="accordion__label">
-                <span>Exploration<span class="accordion__sublabel">Developed four distinct interaction models, each representing a different philosophy for how operators would move through a work order.</span></span>
-                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-              </summary>
-              <div class="accordion__body">
-                <p>Four interaction models were developed, each representing a distinct philosophy for how the product should behave. Each model was a different answer to the same question, what does this operator actually need in front of them, and what gets in the way?</p>
-                <img src="images/kiosk/four-concepts.png" alt="Four interaction models" style="width: 100%; height: auto; display: block; margin-top: 28px; border-radius: 8px;">
-              </div>
-            </details>
-          </div>
-
-          <div class="accordion__card">
-            <details class="accordion__item">
-              <summary class="accordion__label">
-                <span>Validation<span class="accordion__sublabel">Evaluated each model with internal proxies to balance operator needs and scope.</span></span>
-                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-              </summary>
-              <div class="accordion__body">
-                <p>Validation was conducted with the closest proxies to factory floor operators we had: our VP of Design and the Strategy PM who served as the customer proxy, both with direct knowledge of the user base and operator preferences. Each model was evaluated against what operators would actually respond to, what would create friction, and what aligned with the constraints of the environment.</p>
-                <p>MiniFlex was selected. It met the core needs of the operator while leaning on enough existing patterns to limit the scope of net new work, freeing the team to concentrate resources on the one component that had no precedent: the toolbar.</p>
-              </div>
-            </details>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Phase 3 -->
-      <div class="phase" id="phase-3">
-        <h2 class="phase__heading">Phase 3 – High Fidelity</h2>
-        <p class="phase__summary">Five core components were identified across all interaction models. Most had close Redwood equivalents to adapt from. One did not. The toolbar, the operator's primary control surface, was designed from first principles. Inspired by functional companions like the Dynamic Island and motorsport timing displays, it organized navigation, time tracking, and operator actions into a single container built for the edge of the experience. The designs were handed off to the Platform team and developed into a net new Redwood page template.</p>
-        <div class="accordion">
-
-          <!-- Adaptation -->
-          <div class="accordion__card">
-            <details class="accordion__item">
-              <summary class="accordion__label">
-                <span>Adaptation<span class="accordion__sublabel">Mapped five core components to their closest Redwood equivalents, isolating the toolbar as the one piece with no precedent.</span></span>
+                <span>What's most important<span class="accordion__sublabel">Making priority a property of the interface, not a decision the engineer repeats.</span></span>
                 <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </summary>
               <div class="accordion__body">
                 <div class="process-lists">
                   <div class="process-list">
-                    <p>Across all four models, certain elements were consistent, things every operator would need regardless of which interaction model we pursued. We landed on five core components: the Page Header, Multi-Page Navigation, Single-Page Navigation, Action Buttons, and Auxiliary Content such as safety instructions, quality documentation, and attachments. With requirements defined, we began matching components to their closest Redwood equivalents. Some were quick wins like the Headers, Action Buttons, and Auxiliary Content as each had close enough existing patterns to adapt efficiently. Others required significantly more work. Multi-Page Navigation needed iteration and Action Buttons (which evolved in scope and complexity throughout the process) ultimately became the toolbar, the one component the design system couldn't provide a starting point for.</p>
+                    <p>Urgency shifts as an investigation unfolds — scope first, then forensic evidence, then pattern history. The workspace needed to make current priority visible without making the engineer hunt for it.</p>
+                    <p>The Summary does more than anchor the highest-severity alert. It structures the data the AI used to reach its conclusions. Every claim has receipts. The engineer sees the synthesis at the top, but the evidence sits directly below it — inspection tables, temperature records, genealogy relationships — so every AI-assigned risk score and recommendation can be traced back to the data it came from. The engineer isn't trusting a black box. They're reading an auditable argument.</p>
+                    <p>That transparency changes what "deciding" means. Priority Actions surface in a persistent rail — add to the Problem Report, create containment, trigger communications — but the engineer approves them from a position of evidence, not obligation. They can press deeper whenever something doesn't look right. The AI makes the case. The engineer stays in command.</p>
                   </div>
                   <div class="process-list">
                     <span class="process-list__label">Questions</span>
                     <ul class="process-list__items">
-                      <li>Which of these components already exist in our design system, and how close are they to what we need?</li>
-                      <li>For every component we alter, is the enhancement worth the backlog cost?</li>
-                      <li>Where do we spend our design effort?</li>
+                      <li>What earns its place on the first screen the engineer sees?</li>
+                      <li>How does priority shift as the investigation unfolds, and how does the interface keep up?</li>
+                      <li>How does the engineer verify the AI's recommendations without being forced to?</li>
                     </ul>
-                  </div>
-                </div>
-              </div>
-            </details>
-          </div>
-
-          <!-- Innovation -->
-          <div class="accordion__card">
-            <details class="accordion__item">
-              <summary class="accordion__label">
-                <span>Innovation<span class="accordion__sublabel">Designed the toolbar from first principles.</span></span>
-                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-              </summary>
-              <div class="accordion__body">
-                <p>Throughout exploration and adaptation, one problem remained unsolved. The bottom of the screen had accumulated a growing set of functions (step navigation, time tracking, attachments, actions) but no arrangement efficiently contained them. Existing patterns couldn't organize the complexity, and time tracking data had no clear home.</p>
-                <p>The inspiration came from outside enterprise software entirely. The Dynamic Island, a functional companion that adapts to what you're doing as you do it. Motorsport timing displays, real-time metrics that communicate critical information at a glance without demanding attention. Both pointed us toward the same idea: a container that lives at the edge of the experience, surfaces what matters, and stays out of the way.</p>
-                <p>We imagined it as one UX model with two configurations: a static position for standard deployments, and a dynamic, repositionable version that could be moved freely around the screen to accommodate the variability of factory floor workstations. After several rounds of iteration, the solution organized the full set of operator actions, established a clear hierarchy of importance, and presented everything needed without requiring operators to hunt for it.</p>
-                <span class="process-list__label">Questions</span>
-                <ul class="innovation-questions">
-                  <li>How do we design for workstation variability across different factory environments?</li>
-                  <li>What does a functional companion look like on a factory floor?</li>
-                  <li>How do we organize a growing set of functions without overwhelming the operator?</li>
-                </ul>
-                <img src="images/kiosk/toolbar-versions.png" alt="Toolbar versions" style="width: 100%; height: auto; display: block; border-radius: 8px;">
-                <p>The toolbar served as the operator's primary control surface. It gave operators affordances to advance through the required steps of a work order, tracked time at each step with pause and resume functionality, and housed the actions operators relied on most: viewing step details, accessing attachments, calling for assistance, and triggering the Andon light.</p>
-                <p>The most deliberate interaction decision was making it freely repositionable. Factory floors aren't uniform and workstations vary, sight lines differ, and what works at one station creates friction at another. Rather than fixing the toolbar to a position, operators could drag and place it anywhere on the screen, orienting it to their specific setup. No existing pattern covered what this component needed to do. The function, visual design, and interaction model were designed from first principles. However, this surfaced the projects defining tension:</p>
-                <span class="innovation-decisions__heading">Key Decisions — The Toolbar</span>
-                <div class="innovation-decisions">
-                  <p class="innovation-decisions__item">The repositionable toolbar, an interaction decision most directly tied to the realities of the factory floor, was cut from the project scope.</p>
-                  <p class="innovation-decisions__item">While customers had responded favorably to it, the stakeholders deemed the implementation complexity too heavy to include with the build scope.</p>
-                  <p class="innovation-decisions__item">The toolbar shipped with a fixed position and the repositioning logic was documented and added to the backlog.</p>
-                </div>
-                <img src="images/kiosk/scm-design-version.png" alt="SCM design version" style="width: 60%; height: auto; display: block; border-radius: 8px; margin: 0 auto;">
-              </div>
-            </details>
-          </div>
-
-          <!-- Handoff -->
-          <div class="accordion__card">
-            <details class="accordion__item" open>
-              <summary class="accordion__label">
-                <span>Handoff<span class="accordion__sublabel">Handed off a fully resolved design direction to the Platform team, who developed it into a net new Redwood page template.</span></span>
-                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-              </summary>
-              <div class="accordion__body">
-                <p>With the design validated and signed off across product, engineering, and strategy, our role as the SCM design team was complete. The Platform team, the group responsible for the Redwood Design System, developed our designs into a net new page template. What started as a custom solution for one product became part of the system itself.</p>
-                <div class="comparison-grid">
-                  <div class="comparison-item">
-                    <img src="images/kiosk/whatwedesigned.png" alt="What we designed">
-                  </div>
-                  <div class="comparison-item">
-                    <img src="images/kiosk/whatweshipped.png" alt="What we shipped">
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>The AI does the ranking. The engineer does the deciding — from evidence, not from trust.</li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -354,11 +367,10 @@
     <section class="section" id="team">
       <h2 class="team__heading">Team</h2>
       <ul class="overview__team team--centered">
-        <li><span class="team__name">Jennifer Darmour</span><span class="team__role">SVP</span></li>
-        <li><span class="team__name">Mark Pearson</span><span class="team__role">Senior Director</span></li>
-        <li><span class="team__name">Travis Cantrell</span><span class="team__role">UX Designer</span></li>
-        <li><span class="team__name">Rashmi Mohanty</span><span class="team__role">Project Manager</span></li>
-        <li><span class="team__name">Elaine Wan</span><span class="team__role">Strategy</span></li>
+        <li><span class="team__name">Sandeep Datar</span><span class="team__role">SVP</span></li>
+        <li><span class="team__name">Mo Chicharro</span><span class="team__role">Director</span></li>
+        <li><span class="team__name">Travis Cantrell</span><span class="team__role">Senior UX Designer</span></li>
+        <li><span class="team__name">Venkat Raguraman</span><span class="team__role">Project Manager</span></li>
       </ul>
     </section>
 
@@ -396,6 +408,38 @@
     }, { rootMargin: '-10% 0px -60% 0px', threshold: 0 });
 
     targets.forEach(t => observer.observe(t));
+  </script>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog">
+    <div class="lightbox__backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox__content">
+      <button class="lightbox__close" id="lightbox-close">Close ✕</button>
+      <img class="lightbox__img" id="lightbox-img" src="" alt="">
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightbox-img');
+      var lightboxClose = document.getElementById('lightbox-close');
+      var lightboxBackdrop = document.getElementById('lightbox-backdrop');
+
+      document.querySelectorAll('[data-lightbox]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          lightboxImg.src = el.dataset.lightbox;
+          lightboxImg.alt = el.alt;
+          lightbox.classList.add('is-open');
+        });
+      });
+
+      function close() { lightbox.classList.remove('is-open'); }
+      lightboxClose.addEventListener('click', close);
+      lightboxBackdrop.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+      });
+    })();
   </script>
   <script defer src='/_vercel/insights/script.js'></script>
 </body>
