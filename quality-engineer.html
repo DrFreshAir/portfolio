@@ -172,7 +172,7 @@
       <!-- Phase 1 -->
       <div class="phase" id="phase-1">
         <h2 class="phase__heading">Phase 1 – Problem Framing</h2>
-        <p class="phase__summary">The PM had documented the requirements — the what. Phase 1 was about understanding the problem deeply enough to define the how. That meant learning the quality engineer's current process, discovering that investigations are cyclical rather than linear, and organizing the system architecture around four investigative questions that would become the foundation for everything designed in Phase 2.</p>
+        <p class="phase__summary">Phase 1 was about understanding the problem deeply enough to define an effective solution. That meant learning the quality engineer's current process, discovering that investigations are cyclical rather than linear, and organizing the system architecture around four investigative questions that would become the foundation for everything designed in Phase 2.</p>
         <div class="accordion">
 
           <div class="accordion__card">
@@ -308,8 +308,7 @@
                 <div class="process-lists">
                   <div class="process-list">
                     <p>A quality investigation moves through relationships, not categories. A suspect lot points to its parent, to siblings, to the work order, to the operator. Every node is both a destination and a lead.</p>
-                    <p>The node-based model lets each item recontextualize the workspace around it. Context becomes the wayfinding. The navigation nests — moving from Summary headlines to advisor reasoning and finally individual records. Each layer deepens visibility and builds trust between engineer and the AI layer.</p>
-                    <p>Through iteration, the natural language interface ended up carrying more weight than planned. It answers scoped to where the engineer is, and runs as a parallel navigation layer for when asking is faster than clicking.</p>
+                    <p>The node-based model lets each item recontextualize the workspace around it. Context becomes the wayfinding. The navigation nests moving from Summary headlines to advisor reasoning and finally individual records. Each layer deepens the visibility and builds trust between engineer and the AI layer.</p>
                   </div>
                   <div class="process-list">
                     <span class="process-list__label">Questions</span>
@@ -324,6 +323,56 @@
                     </ul>
                   </div>
                 </div>
+                <figure style="margin: 24px 0 0;">
+                  <img src="images/quality/Summary_Level.png" alt="Summary Level" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px;" data-lightbox="images/quality/Summary_Level.png">
+                  <figcaption style="margin-top: 8px; font-size: 13px; color: #999; text-align: center;"><strong style="color: #F5F2EE;">Level 1 — Summary</strong> <em>Synthesis across the full investigation, with scope and cause side by side.</em></figcaption>
+                </figure>
+                <figure style="margin: 24px 0 0;">
+                  <img src="images/quality/Section_level.png" alt="Section Level" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px;" data-lightbox="images/quality/Section_level.png">
+                  <figcaption style="margin-top: 8px; font-size: 13px; color: #999; text-align: center;"><strong style="color: #F5F2EE;">Level 2 — Advisor Expanded</strong> <em>The advisor's full reasoning and supporting evidence, with each node a tappable entry point.</em></figcaption>
+                </figure>
+                <figure style="margin: 24px 0 0;">
+                  <img src="images/quality/Item_Level.png" alt="Item Level" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px;" data-lightbox="images/quality/Item_Level.png">
+                  <figcaption style="margin-top: 8px; font-size: 13px; color: #999; text-align: center;"><strong style="color: #F5F2EE;">Level 3 — Item Record</strong> <em>Complete detail for a single node, with the actions to contain or resolve it.</em></figcaption>
+                </figure>
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>The natural language layer<span class="accordion__sublabel">A parallel navigation discovered through iteration.</span></span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>Treating the NL interface as a chatbot layered on top of the workspace would have missed what engineers actually needed. An answer pulled from the full dataset isn't useful when the engineer is three levels deep in a specific advisor — they need an answer scoped to where they are.</p>
+                    <p>The decision was to build scope-awareness into the interface itself. At the Summary, it reasons across the whole investigation. Inside an advisor, it reasons within that advisor's evidence. Inside an individual record, it reasons about that item alone. The engineer's location in the nested structure became the interface's context automatically.</p>
+                    <p>That made it a second navigation layer. Engineers who knew what they were looking for could skip levels by asking. Engineers who didn't could navigate visually. Same system, two ways in — but only because the NL interface knew where the engineer was standing.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>What role should natural language play in a system that already has structured navigation?</li>
+                      <li>How does an answer stay useful when its scope changes at every level?</li>
+                      <li>When is asking faster than clicking?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>Natural language isn't a feature unless it knows where the engineer is. Scope-awareness is what turned a chatbot into a navigation layer.</li>
+                    </ul>
+                  </div>
+                </div>
+                <figure style="margin: 24px 0 0;">
+                  <img src="images/quality/SectionAO_Query.png" alt="Section AO Query" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px;" data-lightbox="images/quality/SectionAO_Query.png">
+                  <figcaption style="margin-top: 8px; font-size: 13px; color: #999; text-align: center;"><strong style="color: #F5F2EE;">Ask Oracle query</strong> <em>The engineer asks a scoped question from within the advisor view.</em></figcaption>
+                </figure>
+                <figure style="margin: 24px 0 0;">
+                  <img src="images/quality/SectionAO_response.png" alt="Section AO Response" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px;" data-lightbox="images/quality/SectionAO_response.png">
+                  <figcaption style="margin-top: 8px; font-size: 13px; color: #999; text-align: center;"><strong style="color: #F5F2EE;">Ask Oracle response</strong> <em>The system returns a synthesized answer with evidence inline, without leaving the investigation thread.</em></figcaption>
+                </figure>
               </div>
             </details>
           </div>
@@ -337,20 +386,20 @@
               <div class="accordion__body">
                 <div class="process-lists">
                   <div class="process-list">
-                    <p>Urgency shifts as an investigation unfolds — scope first, then forensic evidence, then pattern history. The workspace needed to make current priority visible without making the engineer hunt for it.</p>
-                    <p>The Summary does more than anchor the highest-severity alert. It structures the data the AI used to reach its conclusions. Every claim has receipts. The engineer sees the synthesis at the top, but the evidence sits directly below it — inspection tables, temperature records, genealogy relationships — so every AI-assigned risk score and recommendation can be traced back to the data it came from. The engineer isn't trusting a black box. They're reading an auditable argument.</p>
-                    <p>That transparency changes what "deciding" means. Priority Actions surface in a persistent rail — add to the Problem Report, create containment, trigger communications — but the engineer approves them from a position of evidence, not obligation. They can press deeper whenever something doesn't look right. The AI makes the case. The engineer stays in command.</p>
+                    <p>Urgency shifts as an investigation unfolds — scope first, then forensic evidence, then pattern history. Making the engineer rank those priorities repeatedly was the friction the tool existed to remove.</p>
+                    <p>The decision was to let the AI do the ranking and let the interface express it. That meant designing the Summary not as a dashboard but as a case for action: the synthesis at the top states what the AI concluded, the evidence directly below shows how it got there, and the Priority Actions rail surfaces the specific steps that follow from the conclusion. Every element on the page is arguing for a next move, backed by the data that justifies it.</p>
+                    <p>That framing changed what approval means. The engineer isn't clicking through a queue — they're reviewing an auditable argument and choosing whether it holds. When it doesn't, the evidence is one click away. The AI makes the case. The engineer keeps command.</p>
                   </div>
                   <div class="process-list">
                     <span class="process-list__label">Questions</span>
                     <ul class="process-list__items">
                       <li>What earns its place on the first screen the engineer sees?</li>
-                      <li>How does priority shift as the investigation unfolds, and how does the interface keep up?</li>
+                      <li>How do we express priority without forcing the engineer to rank it?</li>
                       <li>How does the engineer verify the AI's recommendations without being forced to?</li>
                     </ul>
                     <span class="process-list__label">Key Insight</span>
                     <ul class="process-list__items">
-                      <li>The AI does the ranking. The engineer does the deciding — from evidence, not from trust.</li>
+                      <li>The Summary isn't a dashboard. It's a case for action the engineer can audit, approve, or push back on.</li>
                     </ul>
                   </div>
                 </div>
