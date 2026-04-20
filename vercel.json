@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/quality-engineer.html",
+      "destination": "/quality-investigation-agent.html",
+      "permanent": true
+    }
+  ]
+}
