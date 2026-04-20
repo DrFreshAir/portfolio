@@ -13,12 +13,34 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url('images/AI/TitleCard.png');
+      background-image: url('images/quality/Quality_Engineer_Hero.png');
       background-size: cover;
       background-position: center;
       opacity: 0.2;
       border-radius: 12px;
       z-index: -1;
+      transition: opacity 0.4s ease;
+    }
+    .project-card--ai:hover::before {
+      opacity: 0;
+    }
+    .project-card--ai::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/quality/SectionAO_response.png');
+      background-size: cover;
+      background-position: top center;
+      opacity: 0;
+      border-radius: 12px;
+      z-index: -1;
+      transition: opacity 0.4s ease;
+    }
+    .project-card--ai:hover {
+      filter: brightness(1.15);
+    }
+    .project-card--ai:hover::after {
+      opacity: 0.2;
     }
   </style>
 </head>
