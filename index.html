@@ -6,7 +6,69 @@
   <title>Travis Cantrell — UX Designer</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    .project-card--ai {
+    .project-card--signals,
+    .project-card--signals:hover {
+      background: linear-gradient(135deg, #533afd 0%, #4434d4 100%);
+      overflow: hidden;
+    }
+
+    .project-card--placeholder {
+      background: #F5F2EE !important;
+      box-shadow: none;
+    }
+
+    .project-card--placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 2px;
+      background: linear-gradient(135deg, transparent 0%, transparent 70%, #C8C3BC 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+.project-card--placeholder .project-card__title {
+      color: #B0AAA2;
+    }
+
+    .project-card--signals::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.35) 100%);
+      border-radius: 12px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .signals-card__img {
+      position: absolute;
+      top: 43%;
+      left: 50%;
+      transform: translateX(-50%) scale(1);
+      transform-origin: top center;
+      width: 60%;
+      height: auto;
+      pointer-events: none;
+      z-index: 1;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .project-card--signals:hover .signals-card__img {
+      transform: translateX(-50%) translateY(-30%) scale(1.25);
+    }
+
+    .project-card__top {
+      position: relative;
+      z-index: 3;
+    }
+
+    .project-card--ai,
+    .project-card--ai:hover {
+      background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.35) 100%), #2A2A2A;
       isolation: isolate;
     }
     .project-card--ai::before {
@@ -16,7 +78,7 @@
       background-image: url('images/quality/Quality_Engineer_Hero.png');
       background-size: cover;
       background-position: center;
-      opacity: 0.2;
+      opacity: 0.35;
       border-radius: 12px;
       z-index: -1;
       transition: opacity 0.4s ease;
@@ -67,35 +129,44 @@
 
   <main class="projects">
 
-    <!-- Card 1: Production Operator Kiosk — background image, links to kiosk.html -->
+    <!-- Card 1: Signals — links to stripe-signals.html -->
+    <a href="stripe-signals.html" class="project-card project-card--signals" style="position: relative; text-decoration: none; color: inherit;">
+      <div class="project-card__top">
+        <span class="project-card__category">Fintech · Speculative</span>
+        <span class="project-card__meta">2026 · Independent</span>
+      </div>
+      <img src="images/stripe-signals/signals-mac.png" alt="" class="signals-card__img">
+      <span class="project-card__title" style="position: absolute; bottom: 24px; right: 28px; z-index: 3;">Signals</span>
+    </a>
+
+    <!-- Card 2: Quality Investigation Agent — background image, links to quality-investigation-agent.html -->
+    <a href="quality-investigation-agent.html" class="project-card project-card--ai" style="position: relative; text-decoration: none; color: inherit;">
+      <div class="project-card__top">
+        <span class="project-card__category">Enterprise · 0→1</span>
+        <span class="project-card__meta">2025 · Senior UX Designer</span>
+      </div>
+      <div class="project-card__bottom">
+        <img src="images/oracle-logo.png" alt="Oracle" class="project-card__logo">
+        <span class="project-card__title">Quality Investigation Agent</span>
+      </div>
+    </a>
+
+    <!-- Card 3: Production Operator Kiosk — background image, links to kiosk.html -->
     <a href="kiosk.html" class="project-card project-card--linked">
       <div class="project-card__top">
         <span class="project-card__category">Enterprise · 0→1</span>
         <span class="project-card__meta">2023 · UX Designer</span>
       </div>
-      <img src="images/oracle-logo.png" alt="Oracle" class="project-card__logo">
-      <span class="project-card__title">Production Operator Kiosk</span>
+      <div class="project-card__bottom">
+        <img src="images/oracle-logo.png" alt="Oracle" class="project-card__logo">
+        <span class="project-card__title">Production Operator Kiosk</span>
+      </div>
     </a>
 
-    <!-- Card 2: Quality Investigation Agent — background image, links to quality-investigation-agent.html -->
-    <a href="quality-investigation-agent.html" class="project-card project-card--ai" style="background: #2A2A2A; position: relative; text-decoration: none; color: inherit;">
-      <div class="project-card__top">
-        <span class="project-card__category">Enterprise · 0→1</span>
-        <span class="project-card__meta">2025 · Senior UX Designer</span>
-      </div>
-      <img src="images/oracle-logo.png" alt="Oracle" class="project-card__logo">
-      <span class="project-card__title" style="position: absolute; bottom: 32px; right: 32px;">Quality Investigation Agent</span>
-    </a>
-
-    <!-- Card 3: Industrial Mobile Scanner — plain dark, no link -->
-    <a href="password.html" class="project-card" style="background: #2A2A2A; position: relative; text-decoration: none; color: inherit;">
-      <div class="project-card__top">
-        <span class="project-card__category">Enterprise · 0→1</span>
-        <span class="project-card__meta">2026 · Senior UX Designer</span>
-      </div>
-      <img src="images/oracle-logo.png" alt="Oracle" class="project-card__logo">
-      <span class="project-card__title" style="position: absolute; bottom: 32px; right: 32px;">Industrial Mobile Scanner</span>
-    </a>
+    <!-- Card 4: Placeholder -->
+    <div class="project-card project-card--placeholder" style="position: relative; cursor: default;">
+      <span class="project-card__title" style="position: absolute; bottom: 24px; right: 28px;">More coming soon</span>
+    </div>
 
   </main>
 

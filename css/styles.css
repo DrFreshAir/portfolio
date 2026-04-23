@@ -315,6 +315,18 @@ body {
   scrollbar-width: none;
 }
 
+@media (min-width: 1441px) {
+  .projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .projects .project-card {
+    height: auto;
+  }
+}
+
 .projects::-webkit-scrollbar {
   display: none;
 }
@@ -327,7 +339,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 32px 44px;
+  padding: 24px 28px;
   background: #272727;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.10);
@@ -343,7 +355,7 @@ body {
   text-decoration: none;
   color: inherit;
   position: relative;
-  background: #2A2A2A;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.35) 100%), #2A2A2A;
 }
 
 .project-card--linked::before {
@@ -353,7 +365,7 @@ body {
   background-image: url('../images/homepage-illustration.png');
   background-size: cover;
   background-position: center;
-  opacity: 0.2;
+  opacity: 0.35;
   border-radius: 12px;
   transition: opacity 0.4s ease;
 }
@@ -375,7 +387,7 @@ body {
 }
 
 .project-card--linked:hover {
-  background: #2d2d2d;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.35) 100%), #2d2d2d;
   filter: brightness(1.15);
 }
 
@@ -383,18 +395,21 @@ body {
   opacity: 0.2;
 }
 
-.project-card__logo {
+.project-card__bottom {
   position: absolute;
-  bottom: 32px;
-  left: 32px;
-  height: 43px;
-  width: auto;
+  bottom: 24px;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
 }
 
-.project-card--linked .project-card__title {
-  position: absolute;
-  bottom: 32px;
-  right: 32px;
+.project-card__logo {
+  height: 24px;
+  width: auto;
+  flex-shrink: 0;
 }
 
 .project-card__top {
@@ -408,20 +423,19 @@ body {
   font-weight: 500;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: #999;
+  color: #F5F2EE;
 }
 
 .project-card__meta {
   font-size: 13px;
   font-weight: 400;
-  color: #999;
+  color: #F5F2EE;
   letter-spacing: 0.2px;
 }
 
 .project-card--ai .project-card__category,
 .project-card--ai .project-card__meta {
   color: #F5F2EE;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
 }
 
 .project-card__title {
