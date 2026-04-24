@@ -46,6 +46,23 @@
     .topbar {
       background: transparent;
       border-bottom: 1px solid #333;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ─── Fixed Table of Contents ─── */
+    .toc {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 22.5vw;
+      height: 100vh;
+      padding-top: 96px;
+      z-index: 5;
+    }
+
+    @media (max-width: 900px) {
+      .toc { display: none; }
     }
 
     /* ─── Page wrapper ─── */
@@ -392,6 +409,17 @@
     </a>
   </nav>
 
+  <!-- Table of Contents -->
+  <nav class="toc" aria-label="Table of contents">
+    <span class="toc__label">Contents</span>
+    <ol class="toc__list">
+      <li><a href="#the-problem" class="toc__link">The Problem</a></li>
+      <li><a href="#the-solution" class="toc__link">The Solution</a></li>
+      <li><a href="#the-approach" class="toc__link">The Approach</a></li>
+      <li><a href="#the-pattern" class="toc__link">The Pattern</a></li>
+    </ol>
+  </nav>
+
   <div class="stripe-page">
 
     <h1 class="stripe-title">A cooperative model for merchant health, turning Stripe from silent enforcer to active partner.</h1>
@@ -405,7 +433,7 @@
       <figcaption class="hero-caption">Stripe Signals is a guided resolution system that detects when a merchant&rsquo;s account health is trending toward a crisis and walks them through fixing it before Stripe has to intervene. It bridges the gap between silence and account freeze&nbsp;&mdash; turning Stripe from an opaque enforcer into a cooperative partner.</figcaption>
     </figure>
 
-    <div class="stats-row">
+    <div class="stats-row" id="the-problem">
 
       <h2 class="section-head">The Problem</h2>
 
@@ -437,6 +465,8 @@
 
       </div>
     </div>
+
+    <div id="the-solution">
 
     <h2 class="section-head solution-head">The Solution</h2>
 
@@ -480,6 +510,10 @@
     <div class="solution-cta">
       <a href="https://signals.tcantrell.info" class="solution-btn" target="_blank" rel="noopener noreferrer">Explore it for yourself</a>
     </div>
+
+    </div><!-- /#the-solution -->
+
+    <div id="the-approach">
 
     <h2 class="section-head solution-head">The Approach</h2>
 
@@ -550,11 +584,19 @@
 
     </div>
 
+    </div><!-- /#the-approach -->
+
+    <div id="the-pattern">
+
     <h2 class="section-head solution-head">The Pattern</h2>
 
     <div class="body-copy solution-body">
       <p>Signals isn&rsquo;t a feature. It&rsquo;s the first instance of a new model&nbsp;&mdash; Stripe as an active participant in merchant success, not just infrastructure. The same pattern extends to failed payments, Radar calibration, and growth opportunities. Every merchant Stripe helps fix a problem is GDP preserved, revenue preserved, and a relationship that compounds.</p>
     </div>
+
+    <img src="images/stripe-signals/pattern_callouts.png" alt="Pattern callouts" class="diagram-img" style="margin-top: 48px;" data-lightbox="images/stripe-signals/pattern_callouts.png">
+
+    </div><!-- /#the-pattern -->
 
   </div>
 
@@ -592,6 +634,32 @@
         if (e.key === 'Escape') close();
       });
     })();
+  </script>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc__link');
+    const tocTargets = [...tocLinks]
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    const tocObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.id;
+        const link = document.querySelector(`.toc__link[href="#${id}"]`);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('toc__link--active'));
+          link.classList.add('toc__link--active');
+        } else if (entry.boundingClientRect.top < 0) {
+          link.classList.remove('toc__link--active');
+          link.classList.add('toc__link--seen');
+        } else {
+          link.classList.remove('toc__link--active', 'toc__link--seen');
+        }
+      });
+    }, { rootMargin: '-10% 0px -60% 0px', threshold: 0 });
+
+    tocTargets.forEach(t => tocObserver.observe(t));
   </script>
 
   <script defer src='/_vercel/insights/script.js'></script>
