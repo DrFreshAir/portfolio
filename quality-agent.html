@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quality Investigation Agent — Travis Cantrell</title>
+  <link rel="stylesheet" href="css/kiosk.css">
+  <style>
+
+    body {
+      position: relative;
+      isolation: isolate;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        linear-gradient(#333, #333),
+        linear-gradient(#333, #333);
+      background-size:
+        1px 100%,
+        1px 100%;
+      background-position:
+        calc(max(0px, (100% - 1100px) / 2) + 48px) 0,
+        calc(max(0px, (100% - 1100px) / 2) + min(100%, 1100px) - 48px) 0;
+      background-repeat:
+        no-repeat,
+        no-repeat;
+    }
+
+    .topbar {
+      background: transparent;
+      border-bottom: 1px solid #333;
+      position: relative;
+      z-index: 10;
+    }
+
+    .toc {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 22.5vw;
+      height: 100vh;
+      padding-top: 96px;
+      z-index: 5;
+    }
+
+    .case-study {
+      grid-column: 2;
+    }
+
+    .stripe-page {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 80px 0;
+    }
+
+    .stripe-title {
+      font-family: var(--font-heading);
+      font-size: 56px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0 0 48px;
+      max-width: 28ch;
+    }
+
+    .stripe-lede {
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 68ch;
+      margin: 0 0 40px;
+    }
+
+    .hero-figure {
+      margin: 0 0 80px;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    /* ─── Lightbox ─── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox__img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.6);
+    }
+    .lightbox__close {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-family: 'Suisse Intl', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .lightbox__close:hover { background: rgba(255,255,255,0.18); }
+    .lightbox__backdrop {
+      position: absolute;
+      inset: 0;
+    }
+    .lightbox__content { position: relative; z-index: 1; }
+    .lightbox-trigger {
+      cursor: zoom-in;
+      transition: opacity 0.15s ease;
+    }
+    .lightbox-trigger:hover { opacity: 0.85; }
+
+    @media (max-width: 900px) {
+      .stripe-title { font-size: 40px; }
+      body::before { display: none; }
+      .toc { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .stripe-page { padding: 48px 24px 0; }
+      .stripe-title { font-size: 32px; }
+      .stripe-lede { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav bar -->
+  <nav class="topbar">
+    <a href="index.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
+      Back
+    </a>
+  </nav>
+
+  <div class="stripe-page">
+
+    <h1 class="stripe-title">An agentic investigation workspace, turning scattered data into an auditable evidence trail.</h1>
+
+    <p class="stripe-lede">In regulated manufacturing, quality investigations are data-rich but visibility-poor. When an issue surfaces, the data already exists — scattered across quality records, manufacturing logs, and inventory systems. Quality Engineers spend days stitching it together. Every day spent reconstructing context is a day production lines sit idle and costs climb.</p>
+
+    <figure class="hero-figure">
+      <img src="images/quality/GenealogySummary.png" alt="Quality Investigation Agent" class="hero-img">
+    </figure>
+
+  </div>
+
+  <div class="case-layout">
+
+    <!-- Table of Contents -->
+    <nav class="toc" aria-label="Table of contents">
+      <span class="toc__label">Contents</span>
+      <ol class="toc__list">
+        <li><a href="#project-overview" class="toc__link">Project Overview</a></li>
+        <li><a href="#what-we-delivered" class="toc__link">What We Delivered</a></li>
+        <li><a href="#where-we-started" class="toc__link">Where We Started</a></li>
+        <li>
+          <a href="#the-process" class="toc__link">The Process</a>
+          <ol class="toc__sub">
+            <li><a href="#phase-1" class="toc__sub-link">Problem Framing</a></li>
+            <li><a href="#phase-2" class="toc__sub-link">Interaction Design</a></li>
+          </ol>
+        </li>
+      </ol>
+    </nav>
+
+  <main class="case-study">
+
+    <!-- Project Overview -->
+    <section class="section overview" id="project-overview">
+      <h1 class="section__title">Project Overview</h1>
+
+      <div class="overview__stack">
+
+        <div class="overview__block">
+          <h2>Challenge</h2>
+          <p>Give Quality Engineers a single workspace to investigate, contain, and document quality issues. Replace the manual process of stitching data across fragmented Oracle modules with an agentic system that surfaces evidence, recommends actions, and produces an audit-ready Problem Report.</p>
+        </div>
+
+        <div class="overview__block">
+          <h2>My Role</h2>
+          <p>Solo designer embedded with engineering and a PM from the project's early stages. A broad page template existed that defined the core layout and LLM interaction pattern. The mandate: there's a gap in our quality investigation tools, use this template to close it. No specification on how. The use-case-specific interactions, advisor behaviors, and investigation workflow were all net new.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- What we delivered -->
+    <section class="section" id="what-we-delivered">
+      <h1 class="section__title">What we delivered</h1>
+      <p>In one month, the project went from a stakeholder mandate and an empty page template to a fully defined agentic investigation workspace with three specialized AI advisors, a node-based navigation model for context switching across product genealogies, and an interaction framework that makes AI reasoning auditable at every layer.</p>
+      <img src="images/quality/SummaryAO.png" alt="Summary AO" class="outcome-hero" style="width: 100%;">
+    </section>
+
+    <!-- Existing Screens -->
+    <section class="section" id="where-we-started">
+      <h1 class="section__title">Where we started</h1>
+      <div class="accordion">
+        <div class="accordion__card">
+          <details class="accordion__item" open>
+            <summary class="accordion__label">
+              <span>Functional Design Overview</span>
+              <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="accordion__body">
+              <img src="images/quality/wherewestarted.png" alt="Where We Started" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="section" id="the-process">
+      <h1 class="section__title">What the process looked like</h1>
+      <div class="phase-overview">
+        <div class="phase-card">
+          <span class="phase-card__label">Phase 1 — Problem Framing</span>
+          <p class="phase-card__action">Mapped the investigation process</p>
+          <span class="phase-card__outcome">Defined the advisor architecture</span>
+        </div>
+        <div class="phase-card">
+          <span class="phase-card__label">Phase 2 — Interaction Design</span>
+          <p class="phase-card__action">Iterated the workspace interactions</p>
+          <span class="phase-card__outcome">Resolved the design direction</span>
+        </div>
+      </div>
+
+      <hr class="phase-divider">
+
+      <!-- Phase 1 -->
+      <div class="phase" id="phase-1">
+        <h2 class="phase__heading">Phase 1 – Problem Framing</h2>
+        <p class="phase__summary">Phase 1 was about understanding the problem deeply enough to define an effective solution. That meant learning the quality engineer's current process, discovering that investigations are cyclical rather than linear, and organizing the system architecture around four investigative questions that would become the foundation for everything designed in Phase 2.</p>
+        <div class="accordion">
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Understanding the Requirements<span class="accordion__sublabel">Learned the quality engineer's current process and identified where the real gap was.</span></span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>The PM had documented the requirements and the quality engineer's current process. The gap wasn't a lack of tools — Oracle's products contained the data quality engineers needed. The problem was navigating them. Engineers had to search across isolated, fractured modules with very little help identifying where to look. The containers were in front of them but finding the right information inside them was a needle-in-the-haystack effort.</p>
+                    <p>The output of this entire process is a Problem Report — an auditable artifact that validates what the engineer found, what was affected, and what actions were taken. Every claim in the report needs to be correct and traceable. The stakes aren't just operational — they're regulatory.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>Where does the current process break down most — in finding the data, interpreting it, or connecting it across systems?</li>
+                      <li>What does a quality engineer actually navigate today to build a Problem Report?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>The data existed. The tools existed. What didn't exist was a way to move through them that matched how an investigation actually unfolds.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item" open>
+              <summary class="accordion__label">
+                <span>Mapping the Investigation Flow<span class="accordion__sublabel">Revealed that investigations are cyclical, not linear — each finding opens new questions.</span></span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>Mapping the full investigation process revealed something the requirements didn't capture: Problem Reports aren't constructed linearly. They're cyclical. One suspect leads to another — a flagged Marinara Sauce lot might trace to sour Tomato Paste, an incorrect Citric Acid measurement, or bad tomatoes at the source. Each finding opens new questions. What other lots used those ingredients? Are there other products out there that might be affected? When was that shipment? What truck?</p>
+                    <p>Or it's not the ingredients at all — it's a process deviation. The viscosity is off. Did a machine malfunction? Did an operator miss a step? Each answer reframes the investigation.</p>
+                    <p>What started as a simple A-to-Z diagram became an interwoven, self-educating process. The flow diagram grew to reflect that reality — branching, looping back, and expanding scope as new evidence surfaced.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>How far has this contaminated material spread?</li>
+                      <li>Is there a likely source for the issue?</li>
+                      <li>Did something physically deviate on the manufacturing floor?</li>
+                      <li>Is this a known recurring issue, or an isolated event?</li>
+                      <li>Are containment teams aware and executing?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>Investigations are cyclical and subjective to what you're finding. The tool needed to support an engineer going deeper into the genealogy without losing the thread of where they started.</li>
+                    </ul>
+                  </div>
+                </div>
+                <img src="images/quality/Genealogy_UserFlow.png" alt="Genealogy User Flow" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px; margin-top: 24px;" data-lightbox="images/quality/Genealogy_UserFlow.png">
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>Defining the Advisor Architecture<span class="accordion__sublabel">Organized existing data domains into a framework of four investigative questions.</span></span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>The categories for the advisors weren't invented — they already existed as isolated data points across Oracle's products. The design move was recognizing that each one answered a distinct investigative question and organizing them into a framework simple enough to navigate.</p>
+                    <p>Domain-specific terminology made the system legible internally, but framing each advisor around a foundational question made the architecture intuitive: What was affected? Where was it found? Why did it fail? When has this been an issue? Four questions, three specialized advisors to answer them, and one orchestrator to hold the investigation together.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>The 4W's gave the advisor system a logic that transcended domain terminology. A quality engineer doesn't need to know they're using the "Transactional Intelligence Advisor" — they need to know they're answering why did this fail.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase" id="phase-2">
+        <h2 class="phase__heading">Phase 2 – Interaction Design</h2>
+        <p class="phase__summary">With the investigative flow mapped and the advisor architecture defined, Phase 2 turned to the harder question: how should this system actually feel to use? The template was a container, not a solution. Designing inside-out and letting the template dictate the interactions would have produced something structurally sound but operationally hollow. Designing outside-in meant starting from the engineer's reality and making the container adapt. That choice shaped everything that followed: how the engineer moves through an investigation, what surfaces first, and how the AI's reasoning stays visible at every layer.</p>
+        <div class="accordion">
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>How the engineer uses the template<span class="accordion__sublabel">Restoring the engineer's existing mental model to its intended weight.</span></span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>Quality engineers already had a working mental model: validate, decide, communicate. The problem wasn't the model. It was the infrastructure. Fragmented tools meant engineers spent more time hunting for data than investigating.</p>
+                    <p>The template's job was to get out of the way. Validate stops meaning "search five systems" and starts meaning "review what surfaced." Decide stops meaning "cross-reference manually" and starts meaning "observe, review and approve the AI's recommendation." Communicate stops meaning "assemble the report" and starts meaning "synthesize findings into an auditable document."</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>What does the engineer actually do today, and where does the current process fail them?</li>
+                      <li>Where should the template stay out of the way, and where should it actively help?</li>
+                      <li>How do we design for a mental model we don't want to replace?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>The mental model wasn't the design problem — the infrastructure was. The template succeeds when it disappears.</li>
+                    </ul>
+                  </div>
+                </div>
+                <img src="images/quality/Genealogy_DataArchitecture.png" alt="Genealogy Data Architecture" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px; margin-top: 24px;" data-lightbox="images/quality/Genealogy_DataArchitecture.png">
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item" open>
+              <summary class="accordion__label">
+                <span>How they navigate<span class="accordion__sublabel">Making the data itself the map.</span></span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>A quality investigation moves through relationships, not categories. A suspect lot points to its parent, to siblings, to the work order, to the operator. Every node is both a destination and a lead.</p>
+                    <p>The node-based model lets each item recontextualize the workspace around it. Context becomes the wayfinding. The navigation nests moving from Summary headlines to advisor reasoning and finally individual records. Each layer deepens the visibility and builds trust between engineer and the AI layer.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>How does the engineer move through the investigation without losing context?</li>
+                      <li>What does navigation look like when investigations branch and loop back?</li>
+                      <li>How do we show the AI's reasoning without burying the engineer in data?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>Context becomes the wayfinding. Nesting is the transparency, and natural language runs alongside it.</li>
+                    </ul>
+                  </div>
+                </div>
+                <figure style="margin: 24px 0 0;">
+                  <img src="images/quality/Summary_Level.png" alt="Summary Level" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px;" data-lightbox="images/quality/Summary_Level.png">
+                  <figcaption style="margin-top: 8px; font-size: 13px; color: #999; text-align: center;"><strong style="color: #F5F2EE;">Level 1 — Summary</strong> <em>Synthesis across the full investigation, with scope and cause side by side.</em></figcaption>
+                </figure>
+                <figure style="margin: 24px 0 0;">
+                  <img src="images/quality/Section_level.png" alt="Section Level" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px;" data-lightbox="images/quality/Section_level.png">
+                  <figcaption style="margin-top: 8px; font-size: 13px; color: #999; text-align: center;"><strong style="color: #F5F2EE;">Level 2 — Advisor Expanded</strong> <em>The advisor's full reasoning and supporting evidence, with each node a tappable entry point.</em></figcaption>
+                </figure>
+                <figure style="margin: 24px 0 0;">
+                  <img src="images/quality/Item_Level.png" alt="Item Level" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px;" data-lightbox="images/quality/Item_Level.png">
+                  <figcaption style="margin-top: 8px; font-size: 13px; color: #999; text-align: center;"><strong style="color: #F5F2EE;">Level 3 — Item Record</strong> <em>Complete detail for a single node, with the actions to contain or resolve it.</em></figcaption>
+                </figure>
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item" open>
+              <summary class="accordion__label">
+                <span>The natural language layer<span class="accordion__sublabel">A parallel navigation discovered through iteration.</span></span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>Treating the NL interface as a chatbot layered on top of the workspace would have missed what engineers actually needed. An answer pulled from the full dataset isn't useful when the engineer is three levels deep in a specific advisor — they need an answer scoped to where they are.</p>
+                    <p>The decision was to build scope-awareness into the interface itself. At the Summary, it reasons across the whole investigation. Inside an advisor, it reasons within that advisor's evidence. Inside an individual record, it reasons about that item alone. The engineer's location in the nested structure became the interface's context automatically.</p>
+                    <p>That made it a second navigation layer. Engineers who knew what they were looking for could skip levels by asking. Engineers who didn't could navigate visually. Same system, two ways in — but only because the NL interface knew where the engineer was standing.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>What role should natural language play in a system that already has structured navigation?</li>
+                      <li>How does an answer stay useful when its scope changes at every level?</li>
+                      <li>When is asking faster than clicking?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>Natural language isn't a feature unless it knows where the engineer is. Scope-awareness is what turned a chatbot into a navigation layer.</li>
+                    </ul>
+                  </div>
+                </div>
+                <figure style="margin: 24px 0 0;">
+                  <img src="images/quality/SectionAO_Query.png" alt="Section AO Query" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px;" data-lightbox="images/quality/SectionAO_Query.png">
+                  <figcaption style="margin-top: 8px; font-size: 13px; color: #999; text-align: center;"><strong style="color: #F5F2EE;">Ask Oracle query</strong> <em>The engineer asks a scoped question from within the advisor view.</em></figcaption>
+                </figure>
+                <figure style="margin: 24px 0 0;">
+                  <img src="images/quality/SectionAO_response.png" alt="Section AO Response" class="lightbox-trigger" style="width: 100%; height: auto; display: block; border-radius: 8px;" data-lightbox="images/quality/SectionAO_response.png">
+                  <figcaption style="margin-top: 8px; font-size: 13px; color: #999; text-align: center;"><strong style="color: #F5F2EE;">Ask Oracle response</strong> <em>The system returns a synthesized answer with evidence inline, without leaving the investigation thread.</em></figcaption>
+                </figure>
+              </div>
+            </details>
+          </div>
+
+          <div class="accordion__card">
+            <details class="accordion__item">
+              <summary class="accordion__label">
+                <span>What's most important<span class="accordion__sublabel">Making priority a property of the interface, not a decision the engineer repeats.</span></span>
+                <svg class="accordion__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="accordion__body">
+                <div class="process-lists">
+                  <div class="process-list">
+                    <p>Urgency shifts as an investigation unfolds — scope first, then forensic evidence, then pattern history. Making the engineer rank those priorities repeatedly was the friction the tool existed to remove.</p>
+                    <p>The decision was to let the AI do the ranking and let the interface express it. That meant designing the Summary not as a dashboard but as a case for action: the synthesis at the top states what the AI concluded, the evidence directly below shows how it got there, and the Priority Actions rail surfaces the specific steps that follow from the conclusion. Every element on the page is arguing for a next move, backed by the data that justifies it.</p>
+                    <p>That framing changed what approval means. The engineer isn't clicking through a queue — they're reviewing an auditable argument and choosing whether it holds. When it doesn't, the evidence is one click away. The AI makes the case. The engineer keeps command.</p>
+                  </div>
+                  <div class="process-list">
+                    <span class="process-list__label">Questions</span>
+                    <ul class="process-list__items">
+                      <li>What earns its place on the first screen the engineer sees?</li>
+                      <li>How do we express priority without forcing the engineer to rank it?</li>
+                      <li>How does the engineer verify the AI's recommendations without being forced to?</li>
+                    </ul>
+                    <span class="process-list__label">Key Insight</span>
+                    <ul class="process-list__items">
+                      <li>The Summary isn't a dashboard. It's a case for action the engineer can audit, approve, or push back on.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Team -->
+    <section class="section" id="team">
+      <h2 class="team__heading">Team</h2>
+      <ul class="overview__team team--centered">
+        <li><span class="team__name">Sandeep Datar</span><span class="team__role">SVP</span></li>
+        <li><span class="team__name">Mo Chicharro</span><span class="team__role">Director</span></li>
+        <li><span class="team__name">Travis Cantrell</span><span class="team__role">Senior UX Designer</span></li>
+        <li><span class="team__name">Venkat Raguraman</span><span class="team__role">Project Manager</span></li>
+      </ul>
+    </section>
+
+  </main>
+
+  </div><!-- /.case-layout -->
+
+  <div class="return-top-wrap">
+    <button class="return-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">Return to top</button>
+    <button class="return-top" onclick="document.getElementById('contact-modal').classList.add('is-open')">Want to learn more?</button>
+  </div>
+
+  <div class="contact-modal" id="contact-modal" role="dialog" aria-modal="true">
+    <div class="contact-modal__backdrop" id="contact-modal-backdrop"></div>
+    <div class="contact-modal__card">
+      <button class="contact-modal__close" id="contact-modal-close">Close ✕</button>
+      <h2 class="contact-modal__heading">Say hello.</h2>
+      <a href="mailto:hello@traviscantrell.info" class="contact-modal__email">hello@traviscantrell.info</a>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog">
+    <div class="lightbox__backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox__content">
+      <button class="lightbox__close" id="lightbox-close">Close ✕</button>
+      <img class="lightbox__img" id="lightbox-img" src="" alt="">
+    </div>
+  </div>
+
+  <script>
+    const allLinks = document.querySelectorAll('.toc__link, .toc__sub-link');
+    const targets = [...allLinks]
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.id;
+        const link = document.querySelector(`.toc__link[href="#${id}"], .toc__sub-link[href="#${id}"]`);
+        if (!link) return;
+        const activeClass = link.classList.contains('toc__sub-link') ? 'toc__sub-link--active' : 'toc__link--active';
+
+        if (entry.isIntersecting) {
+          allLinks.forEach(l => l.classList.remove('toc__link--active', 'toc__sub-link--active'));
+          link.classList.add(activeClass);
+        } else if (entry.boundingClientRect.top < 0) {
+          link.classList.remove(activeClass);
+          link.classList.add('toc__link--seen');
+        } else {
+          link.classList.remove(activeClass, 'toc__link--seen');
+        }
+      });
+    }, { rootMargin: '-10% 0px -60% 0px', threshold: 0 });
+
+    targets.forEach(t => observer.observe(t));
+
+    (function () {
+      var modal = document.getElementById('contact-modal');
+      document.getElementById('contact-modal-backdrop').addEventListener('click', function () { modal.classList.remove('is-open'); });
+      document.getElementById('contact-modal-close').addEventListener('click', function () { modal.classList.remove('is-open'); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') modal.classList.remove('is-open'); });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightbox-img');
+      var lightboxClose = document.getElementById('lightbox-close');
+      var lightboxBackdrop = document.getElementById('lightbox-backdrop');
+
+      document.querySelectorAll('[data-lightbox]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          lightboxImg.src = el.dataset.lightbox;
+          lightboxImg.alt = el.alt;
+          lightbox.classList.add('is-open');
+        });
+      });
+
+      function close() { lightbox.classList.remove('is-open'); }
+      lightboxClose.addEventListener('click', close);
+      lightboxBackdrop.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+      });
+    })();
+  </script>
+  <script defer src='/_vercel/insights/script.js'></script>
+</body>
+</html>
