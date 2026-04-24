@@ -483,6 +483,16 @@
 
   <div class="return-top-wrap">
     <button class="return-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">Return to top</button>
+    <button class="return-top" onclick="document.getElementById('contact-modal').classList.add('is-open')">Want to learn more?</button>
+  </div>
+
+  <div class="contact-modal" id="contact-modal" role="dialog" aria-modal="true">
+    <div class="contact-modal__backdrop" id="contact-modal-backdrop"></div>
+    <div class="contact-modal__card">
+      <button class="contact-modal__close" id="contact-modal-close">Close ✕</button>
+      <h2 class="contact-modal__heading">Say hello.</h2>
+      <a href="mailto:hello@traviscantrell.info" class="contact-modal__email">hello@traviscantrell.info</a>
+    </div>
   </div>
 
   <script>
@@ -511,6 +521,13 @@
     }, { rootMargin: '-10% 0px -60% 0px', threshold: 0 });
 
     targets.forEach(t => observer.observe(t));
+
+    (function () {
+      var modal = document.getElementById('contact-modal');
+      document.getElementById('contact-modal-backdrop').addEventListener('click', function () { modal.classList.remove('is-open'); });
+      document.getElementById('contact-modal-close').addEventListener('click', function () { modal.classList.remove('is-open'); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') modal.classList.remove('is-open'); });
+    })();
   </script>
   <script defer src='/_vercel/insights/script.js'></script>
 </body>
