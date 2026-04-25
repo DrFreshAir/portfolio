@@ -8,7 +8,9 @@
       "Bash(curl -sL \"https://simpleicons.org/icons/figma.svg\" -o figma.svg)",
       "Bash(curl -sL \"https://simpleicons.org/icons/anthropic.svg\" -o claude.svg)",
       "Bash(curl -sL \"https://simpleicons.org/icons/google.svg\" -o google.svg)",
-      "Bash(sips *)"
+      "Bash(sips *)",
+      "Bash(git config *)",
+      "Bash(git pull *)"
     ]
   }
 }
