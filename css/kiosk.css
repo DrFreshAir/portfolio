@@ -859,3 +859,62 @@ details[open] .accordion__icon {
   font-size: 14px;
   color: #999;
 }
+
+/* ─── Mobile ────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 24px;
+  }
+
+  .case-layout {
+    display: block;
+  }
+
+  .case-study {
+    padding: 40px 24px 80px;
+  }
+
+  .section {
+    margin-bottom: 64px;
+  }
+
+  h1 {
+    font-size: 32px;
+    letter-spacing: -0.5px;
+  }
+
+  h2 {
+    font-size: 15px;
+  }
+
+  .context-grid {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  .process-lists {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .return-top-wrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 32px 24px 64px;
+  }
+
+  .return-top {
+    width: 100%;
+    text-align: center;
+  }
+
+  .contact-modal__card {
+    padding: 40px 32px;
+  }
+
+  .contact-modal__heading {
+    font-size: 48px;
+  }
+}

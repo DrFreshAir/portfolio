@@ -139,11 +139,33 @@
       position: relative;
       z-index: 1;
     }
+
+    .experience-item--mobile-oracle { display: none; }
+
+    @media (max-width: 768px) {
+      .experience-item--mobile-oracle { display: flex; }
+      .experience-item--desktop-oracle { display: none; }
+
+      .about {
+        margin: 0;
+        width: 100%;
+        height: auto;
+        overflow-y: visible;
+        padding: 0 16px 48px;
+        gap: 12px;
+      }
+      .photo-grid__row .photo-grid__img {
+        height: 200px;
+      }
+    }
   </style>
 </head>
 <body>
 
   <aside class="sidebar">
+    <button class="sidebar__menu-toggle" aria-label="Toggle menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <div class="sidebar__top">
       <div class="sidebar__identity">
         <img src="images/cantrell_photo.jpg" alt="Travis Cantrell" class="sidebar__photo">
@@ -180,13 +202,18 @@
         <div class="about-block">
           <h2 class="about-subheading">Experience</h2>
           <ul class="experience-list">
-            <li class="experience-item">
+            <li class="experience-item experience-item--mobile-oracle">
+              <img src="images/AboutMe/Oracle-Logo-Black.png" alt="Oracle" class="experience-logo">
+              <span class="experience-company">Oracle</span>
+              <span class="experience-years">2022–2026</span>
+            </li>
+            <li class="experience-item experience-item--desktop-oracle">
               <img src="images/AboutMe/Oracle-Logo-Black.png" alt="Oracle" class="experience-logo">
               <span class="experience-company">Oracle</span>
               <span class="experience-role">Senior UX Designer</span>
               <span class="experience-years">2025–2026</span>
             </li>
-            <li class="experience-item">
+            <li class="experience-item experience-item--desktop-oracle">
               <img src="images/AboutMe/Oracle-Logo-Black.png" alt="Oracle" class="experience-logo">
               <span class="experience-company">Oracle</span>
               <span class="experience-role">UX Designer</span>
@@ -298,6 +325,11 @@
     });
   </script>
 
+  <script>
+    document.querySelector('.sidebar__menu-toggle').addEventListener('click', function () {
+      document.querySelector('.sidebar').classList.toggle('is-open');
+    });
+  </script>
   <script defer src='/_vercel/insights/script.js'></script>
 </body>
 </html>
