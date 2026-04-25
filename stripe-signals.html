@@ -386,7 +386,18 @@
     @media (max-width: 900px) {
       .stripe-title { font-size: 40px; }
       body::before { display: none; }
+      .toc { display: none; }
       .stats-row { grid-template-columns: 200px 1fr; gap: 48px; }
+    }
+
+    @media (max-width: 768px) {
+      .section-figure {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .section-img {
+        order: -1;
+      }
     }
 
     @media (max-width: 640px) {
@@ -461,7 +472,7 @@
           <p>This matters more now because AI is lowering the barrier to starting a business. More first-time merchants who don&rsquo;t understand dispute rates or monitoring programs are coming online. Stripe&rsquo;s current model doesn&rsquo;t scale for that population. The problem is real and it&rsquo;s about to get larger.</p>
         </div>
 
-        <img src="images/stripe-signals/Model-Diagram.png" alt="Stripe Signals model diagram" class="diagram-img">
+        <img src="images/stripe-signals/Model-Diagram.png" alt="Stripe Signals model diagram" class="diagram-img" data-lightbox="images/stripe-signals/Model-Diagram.png">
 
       </div>
     </div>
