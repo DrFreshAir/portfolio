@@ -104,11 +104,23 @@
     .project-card--ai:hover::after {
       opacity: 0.2;
     }
+
+    @media (max-width: 768px) {
+      .signals-card__img {
+        transform: translateX(-50%) scale(1.68);
+      }
+      .project-card--signals:hover .signals-card__img {
+        transform: translateX(-50%) translateY(-30%) scale(1.93);
+      }
+    }
   </style>
 </head>
 <body>
 
   <aside class="sidebar">
+    <button class="sidebar__menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <div class="sidebar__top">
       <div class="sidebar__identity">
         <img src="images/cantrell_photo.jpg" alt="Travis Cantrell" class="sidebar__photo">
@@ -132,7 +144,7 @@
     <!-- Card 1: Signals — links to stripe-signals.html -->
     <a href="stripe-signals.html" class="project-card project-card--signals" style="position: relative; text-decoration: none; color: inherit;">
       <div class="project-card__top">
-        <span class="project-card__category">Fintech · Speculative</span>
+        <span class="project-card__category">Fintech ·<br class="mobile-br"> Speculative</span>
         <span class="project-card__meta">2026 · Independent</span>
       </div>
       <img src="images/stripe-signals/signals-mac.png" alt="" class="signals-card__img">
@@ -142,7 +154,7 @@
     <!-- Card 2: Quality Investigation Agent — background image, links to quality-investigation-agent.html -->
     <a href="password.html" class="project-card project-card--ai" style="position: relative; text-decoration: none; color: inherit;">
       <div class="project-card__top">
-        <span class="project-card__category">Enterprise · 0→1</span>
+        <span class="project-card__category">Enterprise ·<br class="mobile-br"> 0→1</span>
         <span class="project-card__meta">2025 · Senior UX Designer</span>
       </div>
       <div class="project-card__bottom">
@@ -154,7 +166,7 @@
     <!-- Card 3: Production Operator Kiosk — background image, links to kiosk.html -->
     <a href="operator-kiosk.html" class="project-card project-card--linked">
       <div class="project-card__top">
-        <span class="project-card__category">Enterprise · 0→1</span>
+        <span class="project-card__category">Enterprise ·<br class="mobile-br"> 0→1</span>
         <span class="project-card__meta">2023 · UX Designer</span>
       </div>
       <div class="project-card__bottom">
@@ -171,5 +183,10 @@
   </main>
 
   <script defer src='/_vercel/insights/script.js'></script>
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const sidebar = toggle.closest('.sidebar');
+    toggle.addEventListener('click', () => sidebar.classList.toggle('is-open'));
+  </script>
 </body>
 </html>
