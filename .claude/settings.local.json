@@ -10,7 +10,9 @@
       "Bash(curl -sL \"https://simpleicons.org/icons/google.svg\" -o google.svg)",
       "Bash(sips *)",
       "Bash(git config *)",
-      "Bash(git pull *)"
+      "Bash(git pull *)",
+      "Bash(python3 -m http.server 3000)",
+      "Bash(echo \"Server PID: $!\")"
     ]
   }
 }
