@@ -34,19 +34,10 @@
       color: #B0AAA2;
     }
 
-    .project-card--signals::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.35) 100%);
-      border-radius: 12px;
-      z-index: 2;
-      pointer-events: none;
-    }
 
     .signals-card__img {
       position: absolute;
-      top: 43%;
+      top: 28%;
       left: 50%;
       transform: translateX(-50%) scale(1);
       transform-origin: top center;
@@ -58,7 +49,7 @@
     }
 
     .project-card--signals:hover .signals-card__img {
-      transform: translateX(-50%) translateY(-30%) scale(1.25);
+      transform: translateX(-50%) translateY(-20%) scale(1.25);
     }
 
     .project-card__top {
@@ -91,8 +82,8 @@
       position: absolute;
       inset: 0;
       background-image: url('images/quality/SectionAO_response.png');
-      background-size: cover;
-      background-position: top center;
+      background-size: 110%;
+      background-position: left 30%;
       opacity: 0;
       border-radius: 12px;
       z-index: -1;
@@ -113,6 +104,224 @@
         transform: translateX(-50%) translateY(-30%) scale(1.93);
       }
     }
+
+    /* ─── Kiosk new card design (test) ─────────────────────────── */
+
+    .project-card--kiosk-new {
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      background: #2A2A2A;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .project-card--kiosk-new::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/homepage-illustration.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.35;
+      border-radius: 12px;
+      transition: opacity 0.4s ease;
+    }
+
+    .project-card--kiosk-new::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/kiosk/outcome-hero-dimmed.png');
+      background-size: 130%;
+      background-position: center 30%;
+      opacity: 0;
+      border-radius: 12px;
+      transition: opacity 0.4s ease;
+    }
+
+    .project-card--kiosk-new:hover {
+      filter: brightness(1.15);
+    }
+
+    .project-card--kiosk-new:hover::before {
+      opacity: 0;
+    }
+
+    .project-card--kiosk-new:hover::after {
+      opacity: 0.2;
+    }
+
+    .kiosk-card__logo {
+      position: absolute;
+      top: 22px;
+      left: 24px;
+      height: 27px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      z-index: 3;
+      opacity: 1;
+    }
+
+    .kiosk-card__role {
+      position: absolute;
+      top: 22px;
+      right: 24px;
+      z-index: 3;
+      font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.06em;
+      text-align: right;
+      line-height: 27px;
+      transition: opacity 250ms ease;
+    }
+
+    .project-card--kiosk-new:hover .kiosk-card__role,
+    .project-card--signals:hover .kiosk-card__role,
+    .project-card--ai:hover .kiosk-card__role {
+      opacity: 0;
+    }
+
+    .kiosk-card__gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+      padding: 90px 26px 22px;
+      border-radius: 0 0 12px 12px;
+      transition: background 250ms ease;
+    }
+
+    .project-card--kiosk-new:hover .kiosk-card__gradient {
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 100%);
+    }
+
+    .kiosk-card__title {
+      font-family: var(--font-body);
+      font-size: 24px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .kiosk-card__outcome-lead {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.4;
+      margin-bottom: 8px;
+      max-height: 80px;
+      overflow: hidden;
+      transition: max-height 250ms ease, margin 250ms ease, opacity 250ms ease;
+    }
+
+    .project-card--kiosk-new:hover .kiosk-card__outcome-lead {
+      max-height: 0;
+      margin-bottom: 0;
+      opacity: 0;
+    }
+
+    .kiosk-card__outcome-support {
+      display: block;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.55;
+      margin-bottom: 12px;
+      max-height: 60px;
+      overflow: hidden;
+      transition: max-height 250ms ease, margin 250ms ease, opacity 250ms ease;
+    }
+
+    .project-card--kiosk-new:hover .kiosk-card__outcome-support {
+      max-height: 0;
+      margin-bottom: 0;
+      opacity: 0;
+    }
+
+    .kiosk-card__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+      max-height: 60px;
+      overflow: hidden;
+      transition: max-height 250ms ease, margin 250ms ease, opacity 250ms ease;
+    }
+
+    .project-card--kiosk-new:hover .kiosk-card__pills {
+      max-height: 0;
+      margin-top: 0;
+      opacity: 0;
+    }
+
+    .kiosk-card__pill {
+      font-size: 11px;
+      color: rgba(255,255,255,0.85);
+      padding: 4px 10px;
+      border: 0.5px solid rgba(255,255,255,0.3);
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    /* ─── QIA card — new layout (mirrors Kiosk) ────────────────── */
+
+    .project-card--ai:hover .kiosk-card__gradient {
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 100%);
+    }
+
+    .project-card--ai:hover .kiosk-card__outcome-lead {
+      max-height: 0;
+      margin-bottom: 0;
+      opacity: 0;
+    }
+
+    .project-card--ai:hover .kiosk-card__outcome-support {
+      max-height: 0;
+      margin-bottom: 0;
+      opacity: 0;
+    }
+
+    .project-card--ai:hover .kiosk-card__pills {
+      max-height: 0;
+      margin-top: 0;
+      opacity: 0;
+    }
+
+    /* ─── Signals card — new layout (mirrors Kiosk) ─────────────── */
+
+    .project-card--signals .kiosk-card__gradient {
+      padding-top: 140px;
+    }
+
+    .project-card--signals:hover .kiosk-card__gradient {
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 100%);
+    }
+
+    .project-card--signals:hover .kiosk-card__outcome-lead {
+      max-height: 0;
+      margin-bottom: 0;
+      opacity: 0;
+    }
+
+    .project-card--signals:hover .kiosk-card__outcome-support {
+      max-height: 0;
+      margin-bottom: 0;
+      opacity: 0;
+    }
+
+    .project-card--signals:hover .kiosk-card__pills {
+      max-height: 0;
+      margin-top: 0;
+      opacity: 0;
+    }
+
   </style>
 </head>
 <body>
@@ -141,37 +350,54 @@
 
   <main class="projects">
 
-    <!-- Card 1: Signals — links to stripe-signals.html -->
-    <a href="stripe-signals.html" class="project-card project-card--signals" style="position: relative; text-decoration: none; color: inherit;">
-      <div class="project-card__top">
-        <span class="project-card__category">Fintech ·<br class="mobile-br"> Speculative</span>
-        <span class="project-card__meta">2026 · Independent</span>
-      </div>
-      <img src="images/stripe-signals/signals-mac.png" alt="" class="signals-card__img">
-      <span class="project-card__title" style="position: absolute; bottom: 24px; right: 28px; z-index: 3;">Signals</span>
-    </a>
-
-    <!-- Card 2: Quality Investigation Agent — background image, links to quality-investigation-agent.html -->
+    <!-- Card 1: Quality Investigation Agent -->
     <a href="password.html" class="project-card project-card--ai" style="position: relative; text-decoration: none; color: inherit;">
-      <div class="project-card__top">
-        <span class="project-card__category">Enterprise ·<br class="mobile-br"> 0→1</span>
-        <span class="project-card__meta">2025 · Senior UX Designer</span>
-      </div>
-      <div class="project-card__bottom">
-        <img src="images/oracle-logo.png" alt="Oracle" class="project-card__logo">
-        <span class="project-card__title">Quality Investigation Agent</span>
+      <img src="images/oracle-logo.png" alt="Oracle" class="kiosk-card__logo">
+      <span class="kiosk-card__role">Senior UX Designer · 2026</span>
+      <div class="kiosk-card__gradient">
+        <span class="kiosk-card__title">Quality Investigation Agent</span>
+        <span class="kiosk-card__outcome-lead">An agentic workspace turning scattered data into audit-ready investigations without leaving the workflow.</span>
+        <span class="kiosk-card__outcome-support">Built on the premise that AI in complex domains should remove friction from how experts already think, not change how they think.</span>
+        <div class="kiosk-card__pills">
+          <span class="kiosk-card__pill">0→1 Design</span>
+          <span class="kiosk-card__pill">Enterprise</span>
+          <span class="kiosk-card__pill">AI Product Design</span>
+          <span class="kiosk-card__pill">Industrial UX</span>
+        </div>
       </div>
     </a>
 
-    <!-- Card 3: Production Operator Kiosk — background image, links to kiosk.html -->
-    <a href="operator-kiosk.html" class="project-card project-card--linked">
-      <div class="project-card__top">
-        <span class="project-card__category">Enterprise ·<br class="mobile-br"> 0→1</span>
-        <span class="project-card__meta">2023 · UX Designer</span>
+    <!-- Card 2: Production Operator Kiosk -->
+    <a href="operator-kiosk.html" class="project-card project-card--kiosk-new">
+      <img src="images/oracle-logo.png" alt="Oracle" class="kiosk-card__logo">
+      <span class="kiosk-card__role">Senior Designer · 2024</span>
+      <div class="kiosk-card__gradient">
+        <span class="kiosk-card__title">Production Operator Kiosk</span>
+        <span class="kiosk-card__outcome-lead">A proof-of-concept that became a Redwood Design template that now sets the standard for how Oracle builds for the factory floor.</span>
+        <span class="kiosk-card__outcome-support">Owned end-to-end, from audit through embedding with the Platform team to ship.</span>
+        <div class="kiosk-card__pills">
+          <span class="kiosk-card__pill">0→1 Design</span>
+          <span class="kiosk-card__pill">Enterprise</span>
+          <span class="kiosk-card__pill">Systems Thinking</span>
+          <span class="kiosk-card__pill">Industrial UX</span>
+        </div>
       </div>
-      <div class="project-card__bottom">
-        <img src="images/oracle-logo.png" alt="Oracle" class="project-card__logo">
-        <span class="project-card__title">Production Operator Kiosk</span>
+    </a>
+
+    <!-- Card 3: Signals -->
+    <a href="stripe-signals.html" class="project-card project-card--signals" style="position: relative; text-decoration: none; color: inherit;">
+      <span class="kiosk-card__role">Independent · 2026</span>
+      <img src="images/stripe-signals/signals-mac.png" alt="" class="signals-card__img">
+      <div class="kiosk-card__gradient">
+        <span class="kiosk-card__title">Signals</span>
+        <span class="kiosk-card__outcome-lead">A guided resolution flow that turns adversarial account moments into cooperative ones — designed and built end-to-end with AI tools.</span>
+        <span class="kiosk-card__outcome-support">Speculative project identifying the gap between merchant payment platforms and the businesses that depend on them.</span>
+        <div class="kiosk-card__pills">
+          <span class="kiosk-card__pill">AI-Driven Workflow</span>
+          <span class="kiosk-card__pill">0→1 Design</span>
+          <span class="kiosk-card__pill">Fintech</span>
+          <span class="kiosk-card__pill">Conceptual</span>
+        </div>
       </div>
     </a>
 
