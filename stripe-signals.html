@@ -258,6 +258,8 @@
       border-radius: 10px;
     }
 
+    .diagram-img--mobile-only { display: none; }
+
     /* ─── Full-width section figures ─── */
     .section-figure {
       margin: 48px 0 0;
@@ -402,6 +404,18 @@
 
     @media (max-width: 640px) {
       .stripe-page { padding: 48px 24px 80px; }
+      .case-layout { padding: 0; }
+      .case-study { padding-left: 24px; }
+      .diagram-img--hide-mobile { display: none; }
+      .diagram-img--mobile-only { display: block; }
+      .diagram-img--full-bleed {
+        width: calc(100% + 48px);
+        margin-left: -24px;
+        margin-right: -24px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        border-radius: 0;
+      }
       .stripe-title { font-size: 32px; }
       .stripe-lede { font-size: 16px; margin-bottom: 56px; }
       .stats-row { grid-template-columns: 1fr; gap: 36px; }
@@ -472,10 +486,12 @@
           <p>This matters more now because AI is lowering the barrier to starting a business. More first-time merchants who don&rsquo;t understand dispute rates or monitoring programs are coming online. Stripe&rsquo;s current model doesn&rsquo;t scale for that population. The problem is real and it&rsquo;s about to get larger.</p>
         </div>
 
-        <img src="images/stripe-signals/Model-Diagram.png" alt="Stripe Signals model diagram" class="diagram-img" data-lightbox="images/stripe-signals/Model-Diagram.png">
+        <img src="images/stripe-signals/Model-Diagram.png" alt="Stripe Signals model diagram" class="diagram-img diagram-img--hide-mobile" data-lightbox="images/stripe-signals/Model-Diagram.png">
 
       </div>
     </div>
+
+    <img src="images/stripe-signals/Model-Diagram.png" alt="Stripe Signals model diagram" class="diagram-img diagram-img--full-bleed diagram-img--mobile-only" data-lightbox="images/stripe-signals/Model-Diagram.png">
 
     <div id="the-solution">
 
